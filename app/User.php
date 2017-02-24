@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'clave'
+        'nombre', 'clave', 'telefono', 'direccion', 'cedula'
     ];
 
     /**
@@ -32,6 +32,8 @@ class User extends Authenticatable
     //Un usuario puede tener muchas ventas
     public function ventas()
     {
-        return $this->hasMany('App/Venta', 'id');
+        return $this->hasMany('App/Venta');
     }
+
+    
 }

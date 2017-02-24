@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 use App\Ingrediente;
 use Carbon\Carbon;
-use Request/CreateIngredienteRequest
+use App\Http\Requests\CreateIngredienteRequest;
 
-
-use Request;
 
 class IngredienteController extends Controller
 {
@@ -32,17 +30,18 @@ class IngredienteController extends Controller
       return view('ingrediente.create');
     }
 
+    /*la validación es disparada antes de que se cree el ingrediente*/
     public function store(CreateIngredienteRequest $request)
     {
       
-      $input = Request::all();
+      /*$input = Request::all();*/
       /*$input['published_at'] = Carbon::now(); */                                
       /*$input = Request::get('nombre');
 
       $ingrediente = new Ingrediente();
       $ingrediente->nombre = $input['nombre'];*/
 
-      Ingrediente::create($input);
+      Ingrediente::create($request->all);
 
       return redirect('ingrediente');
     }
