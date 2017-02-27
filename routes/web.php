@@ -27,3 +27,6 @@ Route::post('/ingrediente', 'IngredienteController@store');
 Route::get('/ingrediente/{id}/editar', 'IngredienteController@edit');*/
 
 Route::resource('ingrediente', 'IngredienteController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

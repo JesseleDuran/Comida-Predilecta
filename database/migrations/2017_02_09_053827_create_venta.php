@@ -27,7 +27,7 @@ class CreateVenta extends Migration
 
             $table->foreign('numero_mesa')->references('numero')->on('mesa');
             $table->foreign('ci_cliente')->references('cedula')->on('cliente');
-            $table->foreign('ci_user')->references('cedula')->on('user');
+            $table->foreign('ci_user')->references('cedula')->on('users');
 
             $table->timestamps();
         });
