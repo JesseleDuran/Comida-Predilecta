@@ -10,53 +10,81 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('nombre'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('nombre') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Cedula</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('cedula'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('cedula') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
+                            <label for="telefono" class="col-md-4 control-label">telefono</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="telefono" type="telefono" class="form-control" name="telefono" value="{{ old('telefono') }}" required>
 
-                                @if ($errors->has('password'))
+                                @if ($errors->has('telefono'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
+                            <label for="direccion" class="col-md-4 control-label">direccion</label>
+
+                            <div class="col-md-6">
+                                <input id="direccion" type="direccion" class="form-control" name="direccion" value="{{ old('direccion') }}" required>
+
+                                @if ($errors->has('direccion'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('direccion') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('clave') ? ' has-error' : '' }}">
+                            <label for="clave" class="col-md-4 control-label">clave</label>
+
+                            <div class="col-md-6">
+                                <input id="clave" type="password" class="form-control" name="clave" required>
+
+                                @if ($errors->has('clave'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('clave') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                            <label for="clave-confirm" class="col-md-4 control-label">Confirm clave</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="clave-confirm" type="password" class="form-control" name="clave_confirmation" required>
                             </div>
                         </div>
 
@@ -74,3 +102,5 @@
     </div>
 </div>
 @endsection
+
+@include ('errors.list')

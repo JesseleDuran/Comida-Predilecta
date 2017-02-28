@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -52,7 +53,6 @@ class RegisterController extends Controller
             'cedula' => 'required|max:10|unique:users',
             'clave' => 'required|min:6|confirmed',
             'telefono' => 'required|max:11|unique:users',
-            'fecha_reg' => 'required',
         ]);
     }
 
@@ -65,12 +65,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nombre' => $data['nombre'],
             'cedula' => $data['cedula'],
+            'nombre' => $data['nombre'],
             'clave' => bcrypt($data['clave']),
             'telefono' => $data['telefono'],
             'direccion' => $data['direccion'],
-            'fecha_reg' => $data['fecha_reg'],
         ]);
     }
 }

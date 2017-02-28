@@ -12,11 +12,13 @@ class Comida_Comida extends Model
     	'cantidad'				
     ];
 
-    public function comida(){
-    return $this->belongsTo('App\Comida','id_comida');
+    public function comida()
+    {
+    	return $this->belongsTo('App\Comida','id_comida');
   	}
 
-  	public function combo(){
-    return $this->belongsTo('App\Comida','id_comida1');
+  	public function combo()
+  	{
+    	return $this->belongsTo('App\Comida','id_comida1');
   	}
 }

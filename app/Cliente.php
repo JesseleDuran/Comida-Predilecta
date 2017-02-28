@@ -11,4 +11,10 @@ class Cliente extends Model
     protected $fillable = [
     	'nombre'				
     ];
+
+    //Un cliente puede tener muchas ventas
+    public function ventas()
+    {
+        return $this->hasMany('App/Venta');
+    }
 }

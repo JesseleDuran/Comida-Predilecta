@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class IngredienteController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
+
+
     public function index()
     {
     	$ingredientes = Ingrediente::latest('created_at')->get();
@@ -42,7 +50,9 @@ class IngredienteController extends Controller
       $ingrediente = new Ingrediente();
       $ingrediente->nombre = $input['nombre'];*/
 
+
       Ingrediente::create($request->all());
+
 
       return redirect('ingrediente');
     }

@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('clave');
             $table->string('telefono');
             $table->string('direccion');
-            $table->date('fecha_reg'); 
 
             $table->primary('cedula');
             $table->rememberToken();

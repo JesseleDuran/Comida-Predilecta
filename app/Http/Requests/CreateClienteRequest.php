@@ -24,7 +24,9 @@ class CreateClienteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre' => 'required',
+            'cedula' => 'required',
+            'precio' => 'required',
         ];
     }
 }
