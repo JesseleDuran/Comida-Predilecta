@@ -51,7 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nombre' => 'required|max:255',
             'cedula' => 'required|max:10|unique:users',
-            'clave' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed',
             'telefono' => 'required|max:11|unique:users',
         ]);
     }
@@ -67,7 +67,7 @@ class RegisterController extends Controller
         return User::create([
             'cedula' => $data['cedula'],
             'nombre' => $data['nombre'],
-            'clave' => bcrypt($data['clave']),
+            'password' => bcrypt($data['password']),
             'telefono' => $data['telefono'],
             'direccion' => $data['direccion'],
         ]);

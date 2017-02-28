@@ -22,8 +22,8 @@ class CreateVenta extends Migration
             $table->string('forma_pago');
             $table->boolean('llevar');
             $table->integer('numero_mesa');
-            $table->integer('ci_cliente');
-            $table->integer('ci_user');
+            $table->string('ci_cliente');
+            $table->string('ci_user');
 
             $table->foreign('numero_mesa')->references('numero')->on('mesa');
             $table->foreign('ci_cliente')->references('cedula')->on('cliente');

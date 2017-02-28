@@ -10,6 +10,11 @@ class VentaController extends Controller
     //request['user_id'] = Auth::id();
 
 	//$ingrediente = new Ingrediente(request->all():
-    //Auth::user()->ingrdientes()->save($ingrediente));
+    //Auth::user()->ingredientes()->save($ingrediente));
+
+
+
+   /* $request = $request->all();
+    $request['user_id'] = Auth::id();*/
 
 }

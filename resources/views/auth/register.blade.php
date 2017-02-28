@@ -66,25 +66,25 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('clave') ? ' has-error' : '' }}">
-                            <label for="clave" class="col-md-4 control-label">clave</label>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">password</label>
 
                             <div class="col-md-6">
-                                <input id="clave" type="password" class="form-control" name="clave" required>
+                                <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('clave'))
+                                @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('clave') }}</strong>
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="clave-confirm" class="col-md-4 control-label">Confirm clave</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirm password</label>
 
                             <div class="col-md-6">
-                                <input id="clave-confirm" type="password" class="form-control" name="clave_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
