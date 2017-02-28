@@ -8,3 +8,8 @@ class UserController extends Controller
 {
     //
 }
+
+public function isAdmin()
+{
+	return false;
+}

@@ -10,6 +10,8 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
+                        
+
                         <div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
                             <label for="cedula" class="col-md-4 control-label">Cédula</label>
 

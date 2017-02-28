@@ -27,6 +27,13 @@ Route::post('/ingrediente', 'IngredienteController@store');
 Route::get('/ingrediente/{id}/editar', 'IngredienteController@edit');*/
 
 Route::resource('ingrediente', 'IngredienteController');
+Route::resource('comida', 'ComidaController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+//Route::get('/home', ['middleware => 'admin', 'uses' => 'HomeController@index']); para admin
+
+
+

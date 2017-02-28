@@ -34,8 +34,18 @@ class ComidaController extends Controller
     /*la validación es disparada antes de que se cree el comida*/
     public function store(ComidaRequest $request)
     {
-   
-      Comida::create($request->all());
+      $nuevaComida = Comida::create($request->all());
+
+      $ingredientes = $request->input('ingrediente');
+        
+        foreach ($ingredientes as $ing)
+        {
+          $ingrediente = Ingrediente::where('nombre', '=', $ing);
+
+          $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $ingrediente->id,
+                                         'id_comida' => $nuevaComida->id]);
+          $ingrediente_comida->save();
+        }
 
       return redirect('comida');
     }

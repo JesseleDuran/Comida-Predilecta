@@ -7,7 +7,7 @@
 	<hr/>
 
 	{!! Form::open(['url' => 'ingrediente']) !!}
-		@include ('ingrediente.form', ['submitButtonText' => 'Añadir Ingrediente'])
+		@include ('partials.form', ['submitButtonText' => 'Añadir Ingrediente'])
 	{!! Form::close() !!}
 
 	@include ('errors.list')

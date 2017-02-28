@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateVentaRequest extends FormRequest
+class ComidaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CreateVentaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class CreateVentaRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required',
         ];
     }
 }
