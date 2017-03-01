@@ -7,7 +7,7 @@
 
 	{!! Form::model($ingrediente, ['method' => 'PATCH', 'action' => ['IngredienteController@update', $ingrediente->id]]) !!}
 
-		@include ('ingrediente.form', ['submitButtonText' => 'Actualizar Ingrediente'])
+		@include ('partials.form', ['submitButtonText' => 'Actualizar Ingrediente'])
 
 	{!! Form::close() !!}
 

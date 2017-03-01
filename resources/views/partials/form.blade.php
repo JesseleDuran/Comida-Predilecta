@@ -1,4 +1,4 @@
-@if ($submitButtonText == 'Añadir Ingrediente')
+@if ($submitButtonText == 'Añadir Ingrediente' || $submitButtonText == 'Actualizar Ingrediente')
 <div class="form-group">
 	{!! Form::label('nombre', 'Nombre:') !!}
 	<!-- atributo, default, otro aributo -->

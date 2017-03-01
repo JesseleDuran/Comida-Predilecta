@@ -15,8 +15,6 @@ class IngredienteController extends Controller
       $this->middleware('auth');
   }
 
-
-
     public function index()
     {
     	$ingredientes = Ingrediente::latest('created_at')->get();

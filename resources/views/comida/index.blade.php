@@ -16,6 +16,18 @@
 
 			<div class="cantidad">Cantidad:{{ $comida->cantidad }}</div>
 			<div class="precio">Precio:{{ $comida->precio }}</div>
+			<div class="precio">Descripcion:{{ $comida->descripcion }}</div>
+
+			<h5>Ingredientes:</h5>
+			<ul>
+				@foreach ($comida->comidaIngredientes as $ingrediente)
+
+					<li>{{ $ingrediente->ingrediente->nombre }}</li>
+				@endforeach
+
+
+
+			</ul>
 
 		</article>
 	@endforeach

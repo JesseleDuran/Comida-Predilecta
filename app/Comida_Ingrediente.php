@@ -9,7 +9,9 @@ class Comida_Ingrediente extends Model
     protected $table = "comida_ingrediente";
 
     protected $fillable = [
-    	'cantidad'				
+    	'cantidad',
+      'id_comida',
+      'id_ingrediente',				
     ];
 
     public function comida()

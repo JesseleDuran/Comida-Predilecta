@@ -34,16 +34,19 @@ class ComidaController extends Controller
       return view('comida.create', ['ingredientes' => $ingredientes]);
     }
 
-    /*la validación es disparada antes de que se cree el comida*/
+    /*la validación es disparada antes de que se cree la comida*/
     public function store(ComidaRequest $request)
     {
       $nuevaComida = Comida::create($request->all());
+      $nuevaComida->save();
 
       $ingredientes = $request->input('ingrediente_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
       $cantidades = $request->input('cantidad');
 
       foreach($ingredientes as $key => $in_id)
       {
+    
+
         $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $in_id,
                                                       'id_comida' => $nuevaComida->id, 
                                                       'cantidad'=> $cantidades[$key]]);
