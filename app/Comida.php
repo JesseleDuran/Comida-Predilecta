@@ -34,4 +34,10 @@ class Comida extends Model
     {
     	return $this->hasMany('App\Comida_Ingrediente','id_comida');
   	}
+
+    //Validacion de ingreso de nombre de comida, primera letra may, demas en minusculas
+    
+    public function setnombreAttribute($value){
+        $this->attributes['nombre'] = ucfirst(strtoLower($value));
+    }
 }

@@ -125,7 +125,7 @@
 
 @endif
 
-@if ($submitButtonText == 'Añadir Cliente')
+@if ($submitButtonText == 'Añadir Cliente' || $submitButtonText == 'Actualizar Cliente')
 <div class="form-group">
   {!! Form::label('nombre', 'Nombre:') !!}
   <!-- atributo, default, otro aributo -->
