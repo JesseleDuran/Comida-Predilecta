@@ -9,7 +9,7 @@ class Comida extends Model
     protected $table = "comida";
 
     protected $fillable = [
-    	'nombre','precio','descripcion'				
+    	'nombre','precio','descripcion', 'tipo'				
     ];
 
     //una comida tiene muchas comidas
@@ -17,6 +17,11 @@ class Comida extends Model
     {
     	return $this->hasMany('App\Comida_Comida','id_comida');
   	}
+
+    public function comidaCombo()
+    {
+      return $this->hasMany('App\Comida_Comida','id_comida1');
+    }
 
   	//una comida tiene muchas ventas
   	public function comidaVenta()

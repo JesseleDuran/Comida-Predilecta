@@ -19,8 +19,8 @@ class CreateComidaIngrediente extends Migration
             $table->integer('id_comida')->unsigned();
             $table->integer('cantidad')->unsigned();
 
-            $table->foreign('id_ingrediente')->references('id')->on('ingrediente');
-            $table->foreign('id_comida')->references('id')->on('comida');
+            $table->foreign('id_ingrediente')->references('id')->on('ingrediente')->onDelete('cascade');
+            $table->foreign('id_comida')->references('id')->on('comida')->onDelete('cascade');
             
             $table->timestamps();
         });

@@ -19,8 +19,8 @@ class CreateIngredienteVenta extends Migration
             $table->integer('id_ingrediente')->unsigned(); 
             $table->integer('cantidad')->unsigned(); 
 
-            $table->foreign('id_venta')->references('id')->on('venta');
-            $table->foreign('id_ingrediente')->references('id')->on('ingrediente');
+            $table->foreign('id_venta')->references('id')->on('venta')->onDelete('cascade');
+            $table->foreign('id_ingrediente')->references('id')->on('ingrediente')->onDelete('cascade');
 
             $table->timestamps();
         });

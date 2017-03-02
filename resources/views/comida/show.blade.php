@@ -13,7 +13,11 @@
 		<h5>Ingredientes:</h5>
 		@foreach ($comida->comidaIngredientes as $ingrediente)
 
-			<li>{{ $ingrediente->ingrediente->nombre }}</li>
+			<li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
 		@endforeach
+
+		<article>
+			Cantidad: {{$comida->descripcion}}
+		</article>
 
 @stop

@@ -14,7 +14,7 @@
 					{{ $comida->nombre }}</a>
 			</h2>
 
-			<div class="cantidad">Cantidad:{{ $comida->cantidad }}</div>
+			<div class="cantidad">Cantidad: query </div>
 			<div class="precio">Precio:{{ $comida->precio }}</div>
 			<div class="precio">Descripcion:{{ $comida->descripcion }}</div>
 
@@ -22,7 +22,7 @@
 			<ul>
 				@foreach ($comida->comidaIngredientes as $ingrediente)
 
-					<li>{{ $ingrediente->ingrediente->nombre }}</li>
+					<li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
 				@endforeach
 
 

@@ -16,6 +16,7 @@ class CreateComida extends Migration
         Schema::create('comida', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre')->unique();
+            $table->string('tipo');
             $table->float('precio', 8, 2)->unsigned();
             $table->text('descripcion');
             

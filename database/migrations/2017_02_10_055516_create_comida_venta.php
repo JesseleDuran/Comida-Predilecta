@@ -19,8 +19,8 @@ class CreateComidaVenta extends Migration
             $table->integer('id_comida')->unsigned();
             $table->integer('cantidad')->unsigned();
 
-            $table->foreign('id_venta')->references('id')->on('venta');
-            $table->foreign('id_comida')->references('id')->on('comida');
+            $table->foreign('id_venta')->references('id')->on('venta')->onDelete('cascade');
+            $table->foreign('id_comida')->references('id')->on('comida')->onDelete('cascade');
             $table->timestamps();
         });
     }

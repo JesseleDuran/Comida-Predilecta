@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Comida;
 use App\Comida_Ingrediente;
 use Illuminate\Http\Request;
+use Input\Input;
 use App\Http\Requests\ComidaRequest;
 
 
@@ -16,7 +17,7 @@ class ComidaController extends Controller
 
     public function index()
     {
-    	$comidas = Comida::latest('created_at')->get();
+    	$comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
 
     	return view('comida.index', compact('comidas'));
     }
@@ -37,7 +38,10 @@ class ComidaController extends Controller
     /*la validación es disparada antes de que se cree la comida*/
     public function store(ComidaRequest $request)
     {
+
+      $request->merge(['tipo' => 'comida']);
       $nuevaComida = Comida::create($request->all());
+
       $nuevaComida->save();
 
       $ingredientes = $request->input('ingrediente_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
@@ -45,8 +49,6 @@ class ComidaController extends Controller
 
       foreach($ingredientes as $key => $in_id)
       {
-    
-
         $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $in_id,
                                                       'id_comida' => $nuevaComida->id, 
                                                       'cantidad'=> $cantidades[$key]]);
@@ -59,7 +61,8 @@ class ComidaController extends Controller
     public function edit($id)
     {
       $comida = Comida::findOrFail($id);
-      return view('comida.edit', compact('comida'));
+      $ingredientes = \App\Ingrediente::all(); 
+      return view('comida.edit', compact('comida', 'ingredientes'));
     }
 
     public function update($id, ComidaRequest $request)
@@ -67,6 +70,9 @@ class ComidaController extends Controller
       $comida = Comida::findOrFail($id);
 
       $comida->update($request->all());
+
+      $ingredientes = \App\Ingrediente::all(); 
+
       return redirect('comida');
     }
 }
