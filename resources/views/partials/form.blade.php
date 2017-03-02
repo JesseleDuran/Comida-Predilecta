@@ -118,12 +118,30 @@
 
 @if ($submitButtonText == 'Añadir Mesa')
 
-  <!-- Añade mesa -->
+  <!-- Añade ingrediente -->
 <div class="form-group">
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
 
 @endif
 
+@if ($submitButtonText == 'Añadir Cliente')
+<div class="form-group">
+  {!! Form::label('nombre', 'Nombre:') !!}
+  <!-- atributo, default, otro aributo -->
+  {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('cedula', 'cedula:') !!}
+  {!! Form::text('cedula', null, ['class' => 'form-control']) !!}
+</div>
+
+  <!-- Añade ingrediente -->
+<div class="form-group">
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+
+@endif
 
 

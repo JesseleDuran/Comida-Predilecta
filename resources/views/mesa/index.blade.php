@@ -13,8 +13,10 @@
 					{{ $mesa->nombre }}</a>
 			</h2>
 
-			<div class="id">Numero:{{ $mesa->id }}</div>
-			<div class="estado">Estado:{{ $mesa->estado }}</div>
+			<div class="id">Mesa:{{ $mesa->id }}</div>
+			@if($mesa->estado == false)
+				<h5>Estado: Desocupado</h5>
+			@endif	
 
 		</article>
 	@endforeach

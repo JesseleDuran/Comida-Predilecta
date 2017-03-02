@@ -30,6 +30,7 @@ Route::resource('ingrediente', 'IngredienteController');
 Route::resource('comida', 'ComidaController');
 Route::resource('combo', 'ComboController');
 Route::resource('mesa', 'MesaController');
+Route::resource('cliente', 'ClienteController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

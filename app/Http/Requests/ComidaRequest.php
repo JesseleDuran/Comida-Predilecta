@@ -27,7 +27,6 @@ class ComidaRequest extends FormRequest
             'nombre' => 'required',
             'descripcion' => 'required',
             'precio' => 'required',
-            
         ];
     }
 }

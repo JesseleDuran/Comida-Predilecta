@@ -13,7 +13,7 @@ class ClienteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,7 @@ class ClienteRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
-            'cedula' => 'required',
-            'precio' => 'required',
+            'cedula' => 'required|max:10|unique:users',
         ];
     }
 }

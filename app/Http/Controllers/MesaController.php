@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class MesaController extends Controller
 {
     public function __construct()
-  {
-      $this->middleware('auth');
-  }
+  	{
+      	$this->middleware('auth');
+  	}
 
     public function index()
     {
@@ -30,16 +30,15 @@ class MesaController extends Controller
   	}
 
     public function create()
-    {
-      
+    {   
       return view('mesa.create');
     }
 
     /*la validación es disparada antes de que se cree el ingrediente*/
     public function store()
     {
-     	$mesa = new Mesa(['tipo' => 'falsa']);
-        $ingrediente_comida->save();
+     	$mesa = new Mesa(['estado' => 'false']);
+        $mesa->save();
 
       flash()->success('La mesa ha sido creada');
 

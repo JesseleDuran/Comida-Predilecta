@@ -9,7 +9,7 @@ class Comida_Comida extends Model
     protected $table = "comida_comida";
 
     protected $fillable = [
-    	'cantidad', 'id_comida', 'id_comida1'				
+    	'cantidad'				
     ];
 
     public function comida()
