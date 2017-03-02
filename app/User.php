@@ -37,5 +37,9 @@ class User extends Authenticatable
         return $this->hasMany('App/Venta');
     }
 
+    public function setnombreAttribute($value){
+        $this->attributes['nombre'] = ucfirst(strtoLower($value));
+    }
+
     
 }
