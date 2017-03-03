@@ -16,9 +16,16 @@
 </div>
 
 	<!-- Añade ingrediente -->
-<div class="form-group">
+@if ($errors->any())  
+<div class="form-group" onclick="Materialize.toast('ERROR', 4000)">
 	{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
+@else
+<div class="form-group" onclick="Materialize.toast('Su ingrediente ha sido añadido', 3000)">
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+@endif
+
 
 @endif
 
@@ -54,7 +61,7 @@
   				    <select name="ingrediente_id[0]" id='ingrediente_id[0]'>
        					@foreach ($ingredientes as $in)
                 			<option value="{{$in->id}}">{{$in->nombre}}</option>
-              			@endforeach
+              	@endforeach
             		</select>
           <p class="col m2">Cantidad:</p>
           <input class="col m2" type="number"  name="cantidad[0]" id='cantidad[0]'>

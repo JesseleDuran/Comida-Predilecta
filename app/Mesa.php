@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mesa extends Model
 {
     protected $table = "mesa";
+    public static $numero;
 
     protected $fillable = [
     	'estado'		
@@ -18,8 +19,10 @@ class Mesa extends Model
         return $this->hasMany('App/Venta');
     }
 
-    public validar_mesa($numero, $error_mesa){
-        if($numero <1 || $numero > 10){
+    public function validar_mesa($numero, $error_mesa)
+    {
+        if($numero <1 || $numero > 10)
+        {
             $error_mesa = "Mesa no existe";
             return false;
         }

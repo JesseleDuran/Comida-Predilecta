@@ -5,6 +5,7 @@ use App\Ingrediente;
 use Carbon\Carbon;
 use App\Http\Requests\IngredienteRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 
 class IngredienteController extends Controller
@@ -52,9 +53,7 @@ class IngredienteController extends Controller
 
       flash()->success('El ingrediente ha sido creado');
 
-
-
-      return redirect('ingrediente');
+      return Redirect::back()->with('message','Operation Successful !');
     }
 
     public function edit($id)
