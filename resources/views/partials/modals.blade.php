@@ -11,7 +11,7 @@
                 <ul>
                     <li ><a href="{{ url('/ingrediente') }}" >Ingredientes</a></li>
                   <li><a href="{{ url('/comida') }}" class="orange-text">Comidas y Bebidas</a></li>
-                  <li><a href="Combos.html">Combos</a></li>
+                  <li><a href="{{ url('/combo') }}">Combos</a></li>
                 </ul>
               </div>
             </li>

@@ -2,32 +2,64 @@
 
 @section('content')
 
-	<h1>Combos</h1>
+@include ('partials.modals')
 
-	<hr/>
-
-	@foreach ($combos as $combo)
-		<article>
-			<h2>
-
-				<a href="{{ url('/combo', $combo->id) }}">
-					{{ $combo->nombre }}</a>
-			</h2>
-
-			<div class="cantidad">Cantidad: query más largo</div>
-			<div class="precio">Precio:{{ $combo->precio }}</div>
-			<div class="descripcion">Descripcion:{{ $combo->descripcion }}</div>
-
-			<h5>Comidas:</h5>
-			<ul>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+	  <h2 style="text-align:center"> COMBOS DE MI COMIDA PREDILECTA </h2>
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+			  <th>Descripcion</th>
+			  <th>Comidas</th>
+			  <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach ($combos as $combo)
+		<tr>
+		  <td>
+            <a href="{{ url('/combo', $combo->id) }}">{{ $combo->nombre }}
+          </td>
+		  <td> query más largo </td>
+          <td> {{ $combo->precio }}</td>
+         <td> {{ $combo->descripcion }}</td> 
+         <td>
+         	<ul>
 				@foreach ($combo->comidaCombo as $comida)
 
 					<li>{{ $comida->comida->nombre }} ({{ $comida->cantidad }})</li>
 				@endforeach
 
 			</ul>
+		 </td>	
 
-		</article>
-	@endforeach
+          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Acción</a>
+				  <!-- Sub Menu Accion -->
+			     <ul id='Accion' class='dropdown-content'>
+				      <li><a href="{{url('combo/'.$combo->id.'/edit')}}" class="orange-text">Modificar</a></li>
+				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
+			     </ul>
+		    </td>
+		</tr>
+        @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-@stop
+  @stop
+
+  @section('scripts')
+
+<script>
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
+
+@endsection

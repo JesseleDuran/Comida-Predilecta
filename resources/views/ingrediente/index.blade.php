@@ -20,16 +20,15 @@
 		  <td>
             <a href="{{ url('/ingrediente', $ingrediente->id) }}">{{ $ingrediente->nombre }}</a>
           </td>
-		  <td> {{ $ingrediente->cantidad }}</td>
+		      <td> {{ $ingrediente->cantidad }}</td>
           <td> {{ $ingrediente->precio }}</td>
-          <td>  <div class="input-field col s6">
-				<select>
-				  <option value="" disabled selected>Seleccion una Accion</option>
-				  <option value="1">Modificar</option>
-				  <option value="2">Eliminar</option>
-				</select>
-			  </div>
-		  </td>
+          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Accion</a>
+				  <!-- Sub Menu Accion -->
+			     <ul id='Accion' class='dropdown-content'>
+				      <li><a href="{{url('ingrediente/'.$ingrediente->id.'/edit')}}" class="orange-text">Modificar</a></li>
+				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
+			     </ul>
+		    </td>
 		</tr>
         @endforeach
         </tbody>

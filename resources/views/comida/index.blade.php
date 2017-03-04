@@ -2,34 +2,64 @@
 
 @section('content')
 
-	<h1>Comidas</h1>
+@include ('partials.modals')
 
-	<hr/>
 
-	@foreach ($comidas as $comida)
-		<article>
-			<h2>
-
-				<a href="{{ url('/comida', $comida->id) }}">
-					{{ $comida->nombre }}</a>
-			</h2>
-
-			<div class="cantidad">Cantidad: query </div>
-			<div class="precio">Precio:{{ $comida->precio }}</div>
-			<div class="precio">Descripcion:{{ $comida->descripcion }}</div>
-
-			<h5>Ingredientes:</h5>
-			<ul>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+	  <h2 style="text-align:center"> COMIDAS Y BEBIDAS DE MI COMIDA PREDILECTA </h2>
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+			  <th>Descripcion</th>
+			  <th>Ingredientes</th>
+			  <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach ($comidas as $comida)
+		<tr>
+		  <td>
+            <a href="{{ url('/comida', $comida->id) }}">{{ $comida->nombre }}
+          </td>
+		  <td> query </td>
+          <td> {{ $comida->precio }}</td>
+         <td> {{ $comida->descripcion }}</td> 
+         <td>
+         	<ul>
 				@foreach ($comida->comidaIngredientes as $ingrediente)
 
 					<li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
 				@endforeach
-
-
-
 			</ul>
+		 </td>	
 
-		</article>
-	@endforeach
+          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Acción</a>
+				  <!-- Sub Menu Accion -->
+			     <ul id='Accion' class='dropdown-content'>
+				      <li><a href="{{url('comida/'.$comida->id.'/edit')}}" class="orange-text">Modificar</a></li>
+				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
+			     </ul>
+		    </td>
+		</tr>
+        @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-@stop
+  @stop
+
+  @section('scripts')
+
+<script>
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
+
+@endsection

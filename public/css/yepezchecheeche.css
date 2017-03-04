@@ -2,9 +2,7 @@
 .side-nav a {
     color: white !important;
 }
-.dropdown-content{
-	top: 50px !important;
-}
+
 .dropdown-content li > a:hover {
 	background: #009688 !important;
     color: #fff !important;
