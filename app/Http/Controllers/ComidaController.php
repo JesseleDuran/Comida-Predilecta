@@ -75,4 +75,9 @@ class ComidaController extends Controller
 
       return redirect('comida');
     }
+
+    public function calcularCantidad()
+    {
+      $cantidad_comidas = DB::table('comida')->select('cantidad')->get();
+    }
 }

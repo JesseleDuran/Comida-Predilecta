@@ -42,7 +42,7 @@ class MesaController extends Controller
 
       flash()->success('La mesa ha sido creada');
 
-      return redirect('mesa');
+      return Redirect::back()->with('message','Operation Successful !');
     }
 
     public function edit($id)

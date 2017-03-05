@@ -15,11 +15,8 @@ Route::get('/index', function () {
     return view('index');
 });
 
-
 Route::get('/about', 'PagesController@about');
-
 Route::get('/contact', 'PagesController@contact');
-
 
 /*Route::get('/ingrediente', 'IngredienteController@index');
 Route::get('/ingrediente/crear', 'IngredienteController@create');
@@ -32,10 +29,13 @@ Route::resource('comida', 'ComidaController');
 Route::resource('combo', 'ComboController');
 Route::resource('mesa', 'MesaController');
 Route::resource('cliente', 'ClienteController');
+Route::resource('venta', 'VentaController');
 Auth::routes();
+Route::get('/pdf', 'PdfController@invoice');
+Route::get('/pdfComida', 'PdfController@pdfComida');
+Route::get('/pdfCombo', 'PdfController@pdfCombo');
 
 Route::get('/home', 'HomeController@index');
-
 
 //Route::get('/home', ['middleware => 'admin', 'uses' => 'HomeController@index']); para admin
 

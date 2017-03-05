@@ -1,8 +1,20 @@
 <nav>
   <div class="nav-wrapper orange darken-2">
-    <a href="#!" class="brand-logo center orange darken-2"><i class="material-icons">loyalty</i>Mi Comida Predilecta</a>   
+    <a href="#!" class="brand-logo center orange darken-2"><i class="material-icons">loyalty</i>Mi Comida Predilecta</a> 
+	<a href="#desconex" class="right hide-on-med-and-down">Salir<img src="logout.png" width="32px" height="32px"></a> 
   </div>
+ 
 </nav>
+<!-- Desconex -->
+	<div id="desconex" class="modal">
+		<div class="modal-content">
+		  <div class="row" style="text-align:center">
+			<h4>¿Desea Salir?</h4>
+			  <a href="#!" class=" modal-action modal-close waves-effect waves-orange btn-flat">Si</a>
+			  <a href="#!" class="  modal-action modal-close waves-effect waves-orange btn-flat">No</a>					
+		  </div>
+		</div>	
+	</div>	
     <ul id="nav-mobile" class="side-nav fixed orange darken-2">        
     <ul class="collapsible collapsible-accordion">
 			<li class="bold"><a href="{{ url('/index') }}" class="waves-effect waves-white">Inicio</a></li>	
@@ -20,6 +32,7 @@
                 <ul>
                   <li><a href="Empleados.html">Empleados</a></li>
                   <li><a href="Ventas.html">Ventas</a></li>
+                  <li><a href="{{ url('/cliente') }}">Clientes</a></li>
                 </ul>
               </div>
             </li>
@@ -37,7 +50,6 @@
             </li>
           </ul>
         </li>
-        <li class="bold"><a href="Reporte.html" class="waves-effect waves-white">Generar Reporte</a></li>
         <li class="bold"><a href="Respaldo.html" class="waves-effect waves-white">Generar Respaldo</a></li>
         <li class="bold"><a href="Mesas.html" class="waves-effect waves-white">Trabajar como Vendedor</a></li>
         </ul>

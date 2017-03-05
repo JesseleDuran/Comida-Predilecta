@@ -6,8 +6,14 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
 	  <h2 style="text-align:center"> INGREDIENTES DE MI COMIDA PREDILECTA </h2>
-      
-      <table class="highlight">
+
+      <br>
+      <a href="{{ url('/pdf') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
+      <i class="material-icons">insert_chart</i>  
+      </button></a> 
+      <br>
+      <br>
+      <table class="highlight" id="myTable">
         <thead>
             <th>Nombre</th>
             <th>Cantidad</th>
@@ -40,6 +46,17 @@
 
 @stop
 
+@section('scripts')
+
+<script>
+
+  $(document).ready(function(){
+    $('.modal').modal();
+    $('#myTable').DataTable();
+  });
+</script>
+
+@endsection
 
 
 
