@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('telefono');
             $table->string('direccion');
+            $table->boolean('admin');
 
             $table->primary('cedula');
             $table->rememberToken();

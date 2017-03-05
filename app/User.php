@@ -41,5 +41,10 @@ class User extends Authenticatable
         $this->attributes['nombre'] = ucfirst(strtoLower($value));
     }
 
+    public function isAdmin()
+    {
+        return $this->admin; // this looks for an admin column in your users table
+    }
+
     
 }

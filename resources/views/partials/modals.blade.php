@@ -1,9 +1,27 @@
 <nav>
   <div class="nav-wrapper orange darken-2">
     <a href="#!" class="brand-logo center orange darken-2"><i class="material-icons">loyalty</i>Mi Comida Predilecta</a> 
-	<a href="#desconex" class="right hide-on-med-and-down">Salir<img src="logout.png" width="32px" height="32px"></a> 
-  </div>
- 
+	
+	<!--<a href="#desconex" class="right hide-on-med-and-down">Salir<img src="logout.png" width="32px" height="32px"></a> -->
+	
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
+
+    <ul class="dropdown-menu" role="menu">
+        <li>
+        <a href="{{ route('logout') }}"
+        	onclick="event.preventDefault();
+        	document.getElementById('logout-form').submit();">
+             Logout
+        </a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+         </form>
+         </li>
+    </ul>
+   
 </nav>
 <!-- Desconex -->
 	<div id="desconex" class="modal">
@@ -55,15 +73,7 @@
         </ul>
  <nav>
     <div class="nav-wrapper white">
-		<li class="brand-logo center">
-			  <form>
-				<div class="input-field">
-				  <input id="search" placeholder="Buscar..." type="search" required>
-				  <label class="label-icon"  for="search"><i class="material-icons">search</i></label>
-				  <i class="material-icons">close</i>
-				</div>
-			  </form>		
-		</li>	
+		
       <ul id="nav-mobile" class="right hide-on-med-and-down white">
 
         <li><a class='dropdown-button btn orange darken-2' href='#' data-activates='Agregar'>Agregar</a></li>

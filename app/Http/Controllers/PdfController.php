@@ -10,6 +10,11 @@ use App\Comida;
 
 class PdfController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
+    
     public function invoice() 
     {
         $ingredientes = Ingrediente::latest('created_at')->get();

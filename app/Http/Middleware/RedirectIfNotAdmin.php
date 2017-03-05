@@ -17,8 +17,9 @@ class RedirectIfNotAdmin
     {
         if(! $request->user()->isAdmin())
         {
-            return redirect('ingrediente'); 
+            return $next($request);
+             
         }
-        return $next($request);
+        return redirect('index');
     }
 }

@@ -30,6 +30,7 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/index';
 
+
     /**
      * Create a new controller instance.
      *
@@ -74,4 +75,15 @@ class RegisterController extends Controller
             'direccion' => $data['direccion'],
         ]);
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+
+
 }
