@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -12,13 +11,17 @@ class User extends Authenticatable
     protected $primaryKey = 'cedula';
     public $incrementing = false;
 
+    protected $attributes = array(
+        'admin' => 'false'
+    );
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nombre', 'password', 'telefono', 'direccion', 'cedula'
+        'nombre', 'password', 'telefono', 'direccion', 'cedula', 'admin'
     ];
 
     /**
@@ -46,5 +49,5 @@ class User extends Authenticatable
         return $this->admin; // this looks for an admin column in your users table
     }
 
-    
+ 
 }

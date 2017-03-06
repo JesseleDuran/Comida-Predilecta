@@ -11,10 +11,7 @@ use App\Http\Requests\ComidaRequest;
 
 class ComboController extends Controller
 {
-    public function __construct()
-  	{
-      $this->middleware('auth');
-  	}
+    
 
     public function index()
     {

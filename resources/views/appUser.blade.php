@@ -18,12 +18,49 @@
             <ul id="datos" class="dropdown-content">
               <li><a href="PerfilUsuario.html"><i class="material-icons left">equalizer</i>Mis Ventas</a></li>
               <li class="divider"></li>
-              <li><a href="DatosUsuario.html"><i class="material-icons left">settings</i>Mi Perfil</a></li>
+              <li><a href="{{ url('/miPerfil') }}"><i class="material-icons left">settings</i>Mi Perfil</a></li>
+              <li class="divider"></li>
+              <li>
+
+
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                
+                <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                Logout
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+              </form>
+                
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </li>
           </ul>
 
           <ul class="right hide-on-med-and-down active">
           <!-- Dropdown Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="datos">Nombre Apellido<i class="material-icons right">perm_identity</i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="datos">{{$empleado->nombre}}<i class="material-icons right">perm_identity</i></a></li>
           </ul>
 
           <ul id="nav-mobile" class="side-nav">
@@ -31,7 +68,7 @@
           </ul>
           <div class="nav-content">
             <ul class="tabs tabs teal">
-                <li class="tab"><a target="_self" href="Mesas.html" class="white-text">Mesas</a></li>
+                <li class="tab"><a target="_self" href="{{ url('/empleado/mesas') }}" class="white-text">Mesas</a></li>
                 <li class="tab"><a target="_self" class="white-text" href="Food.html">Comida Disponible</a></li>     
             </ul>     
           </div>
@@ -41,7 +78,7 @@
 
      <br>
      <br>
-     
+
     @yield('content')
 
 

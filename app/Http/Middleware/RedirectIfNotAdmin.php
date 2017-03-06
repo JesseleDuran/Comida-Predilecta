@@ -15,11 +15,11 @@ class RedirectIfNotAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(! $request->user()->isAdmin())
+        if ($request->user()->admin != 'true')
         {
-            return $next($request);
-             
+            return redirect('empleado\mesas');
         }
-        return redirect('index');
+        return $next($request);
+    
     }
 }

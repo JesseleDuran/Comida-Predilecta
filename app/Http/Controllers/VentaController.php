@@ -54,7 +54,7 @@ class VentaController extends Controller
     {
 
       $request = $request->all();
-      $request['ci_user'] = Auth::ci();
+      $request['ci_user'] = Auth::id();
 
       Venta::create($request->all());
 

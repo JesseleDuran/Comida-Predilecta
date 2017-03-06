@@ -6,27 +6,45 @@
       <br><br>
       <div class="row"></div>
       <div class="row"></div>
+  
+<div class="section no-pad-bot  grey lighten-3" id="index-banner">
+          <div class="container">
+      <br><br>
+
       
 
 
       <form class="col s12">
   <div class="row">
     <div class="input-field col s6">
-      <input disabled value="Fulano" id="first_name2" type="text" class="validate">
+      <input disabled value="{{$empleado->nombre}}" id="first_name2" type="text" class="validate">
       <label class="active" for="first_name2">Nombre</label>
     </div>
  
     <div class="input-field col s6">
-      <input disabled value="De Tal" id="first_name2" type="text" class="validate">
-      <label class="active" for="first_name2">Apellido</label>
+      <input disabled value="{{$empleado->cedula}}" id="identification" type="text" class="validate">
+      <label class="active" for="identification">Cédula</label>
     </div>
   </div>
         
-  <div class="row">
-    <div class="input-field col s12">
-      <input disabled value="Casa #99, Calle Imaginaria, Sector X. Puerto Ordaz." id="first_name2" type="text" class="validate">
-      <label class="active" for="first_name2">Domicilio</label>
-    </div>
+  
+        <div class="row">
+                    <div class="input-field col s6">
+                        <input disabled value="{{$empleado->telefono}}" id="phone" type="text" class="validate">
+                        <label class="active" for="phone">Teléfono</label>
+                    </div>
+ 
+                    <div class="input-field col s6">
+                        <input disabled value="{{$empleado->created_at}}" id="datelogin" type="text" class="validate">
+                        <label class="active" for="datelogin">Fecha de Registro</label>
+                    </div>
+        </div>
+          
+        <div class="row">
+                <div class="input-field col s12">
+                    <input disabled value="{{$empleado->direccion}}" id="first_name2" type="text" class="validate">
+                    <label class="active" for="first_name2">Dirección</label>
+        </div>
   </div>
         </form>
       <a class="waves-effect waves-light btn teal" href="#modalclave"><i class="material-icons left">vpn_key</i>¿Desea cambiar su contraseña?</a>
@@ -52,10 +70,10 @@
           <label for="newpasswordconfirm">Confirme Nueva Contraseña</label>
         </div>
       </div>
-    </select>
+  
   </div>
     </div>
-    
+
       
       <div class="row"></div>
       <div class="row"></div>
@@ -89,3 +107,15 @@
 
 
 @stop
+
+@section('scripts')
+
+<script>
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  
+  });
+</script>
+
+@endsection

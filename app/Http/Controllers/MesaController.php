@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Mesa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MesaController extends Controller
 {
-    public function __construct()
-  	{
-      	$this->middleware('auth');
-  	}
-
+    
     public function index()
     {
     	$mesas = Mesa::latest('created_at')->get();

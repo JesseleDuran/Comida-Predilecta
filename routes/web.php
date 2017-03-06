@@ -11,39 +11,40 @@
 |
 */
 
-/*Route::get('/index', function () {
-    return view('index');
-});*/
-
-Route::get('/miPerfil', function () {
-    return view('user.miPerfil');
-});
 
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
 
-Route::resource('ingrediente', 'IngredienteController');
-Route::resource('comida', 'ComidaController');
-Route::resource('combo', 'ComboController');
-Route::resource('mesa', 'MesaController');
 Route::resource('cliente', 'ClienteController');
 Route::resource('venta', 'VentaController');
-
 Auth::routes();
-
-Route::get('/pdf', 'PdfController@invoice');
-Route::get('/pdfComida', 'PdfController@pdfComida');
-Route::get('/pdfCombo', 'PdfController@pdfCombo');
 
 Route::get('/home', 'HomeController@index');
 
-//Route::get('/home', ['middleware => 'admin', 'uses' => 'HomeController@index']); para admin
+//ACCESO SOLO PARA EMPLEADOS
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::get('miPerfil', 'EmpleadoController@miPerfil');
+    Route::get('empleado/mesas', 'EmpleadoController@mesas');
+    Route::get('empleado/{{mesa}}/food', 'EmpleadoController@comida');
 
-Route::get('protected', ['middleware' => ['auth', 'admin'], function() {
-    // this page requires that you be logged in AND be an Admin
-    return view('index');
-}]);
-
-Route::get('protected', ['as' =>'miPerfil', 'uses' => 'PagesController@secure', 'middleware' => 'auth']);
+});
 
 
+
+//ACCESO SOLO PARA ADMINS
+Route::group(['middleware' => 'admin'], function()
+{
+    Route::get('/index', function()
+    {
+        return view('index');     	
+    });
+
+    Route::resource('ingrediente', 'IngredienteController');
+	Route::resource('comida', 'ComidaController');
+	Route::resource('combo', 'ComboController');
+    Route::resource('mesa', 'MesaController');
+	Route::get('/pdf', 'PdfController@invoice'); //ingredientes
+	Route::get('/pdfComida', 'PdfController@pdfComida');
+	Route::get('/pdfCombo', 'PdfController@pdfCombo');	
+});

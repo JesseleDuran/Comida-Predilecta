@@ -10,10 +10,6 @@ use App\Http\Requests\ComidaRequest;
 
 class ComidaController extends Controller
 {
-    public function __construct()
-  	{
-      $this->middleware('auth');
-  	}
 
     public function index()
     {
