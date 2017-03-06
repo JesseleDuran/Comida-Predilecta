@@ -49,7 +49,7 @@
               <div class="collapsible-body orange darken-1">
                 <ul>
                   <li><a href="{{ url('/user') }}">Empleados</a></li>
-                  <li><a href="Ventas.html">Ventas</a></li>
+                  <li><a href="{{ url('/venta') }}">Ventas</a></li>
                   <li><a href="{{ url('/cliente') }}">Clientes</a></li>
                   <li><a href="{{ url('/mesa') }}">Mesas</a></li>
                   <li><a href="{{ url('/ivas') }}">Ivas</a></li>

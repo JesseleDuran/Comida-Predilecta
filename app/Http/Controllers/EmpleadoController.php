@@ -15,8 +15,10 @@ class EmpleadoController extends Controller
     public function mesas()
     {
     	$mesas = Mesa::latest('created_at')->get();
+        $mesas->toArray();
+        $empleado = User::where('cedula' ,Auth::id())->first();
 
-    	return view('empleado/mesas', compact('mesas'));
+    	return view('empleado/mesas', compact('mesas', 'empleado'));
     }
 
     public function miPerfil()
@@ -38,6 +40,7 @@ class EmpleadoController extends Controller
     public function showFood($mesa)
   	{
   		$mesa = Mesa::findOrFail($id);
+        $empleado = User::where('cedula' ,Auth::id())->first();
 
   		return view('empleado.comidaDisponible', compact('mesa'));
   	}

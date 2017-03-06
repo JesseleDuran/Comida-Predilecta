@@ -1,0 +1,11 @@
+.containerM {
+  margin: 0 auto;
+  max-width: 1400px;
+  width: 90%;
+}
+.row .col.m4 {
+    width: 30%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+  }
