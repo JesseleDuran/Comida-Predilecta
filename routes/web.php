@@ -52,5 +52,7 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('/pdfComida', 'PdfController@pdfComida');
     Route::get('/pdfCombo', 'PdfController@pdfCombo');  
     Route::get('/pdfEmpleados', 'PdfController@pdfUser');
+    Route::get('/pdfVenta', 'PdfController@pdfVentas');
+    Route::get('/pdfCliente', 'PdfController@pdfClientes');
 
 });

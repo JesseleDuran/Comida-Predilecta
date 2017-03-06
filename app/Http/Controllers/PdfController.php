@@ -7,6 +7,8 @@ use App\Ingrediente;
 
 use App\Comida;
 use App\User;
+use App\Venta;
+use App\Cliente;
 
 
 class PdfController extends Controller
@@ -39,12 +41,30 @@ class PdfController extends Controller
         return $pdf->stream('pdfCombo');
     }
 
+    public function pdfVentas() 
+    {
+        $ventas = Venta::all();
+        $view =  \View::make('pdf.ventasPDF', compact('ventas'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('pdfVenta');
+    }
+
+    public function pdfClientes() 
+    {
+        $clientes = Cliente::latest('created_at')->get();
+        $view =  \View::make('pdf.clientesPDF', compact('clientes'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('pdfCliente');
+    }
+
     public function pdfUser() 
     {
         $users = User::where('admin', 'false')->get();
-        $view =  \View::make('pdf.userPDF', compact('users'))->render();
+        $view =  \View::make('pdf.usersPDF', compact('users'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->stream('pdfUser');
+        return $pdf->stream('pdfCliente');
     }
 }

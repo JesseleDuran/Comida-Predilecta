@@ -15,29 +15,44 @@
       <br>
       <table class="highlight" id="myTable">
         <thead>
-            <th>Realizada en:</th>
+            <th>Código</th>
+            <th>Fecha</th>
+            <th>Subtotal</th>
+            <th>Forma de Pago</th>
             <th>IVA</th>
-            <th>SubTotal</th>
             <th>Total</th>
             <th>Número de Mesa</th>
             <th>Llevar</th>
-			<th>Acción</th>
+            <th>CI del Empleado</th>
+            <th>CI del Comprador</th>
+			      <th>Acción</th>
         </thead>
         <tbody>
-        @foreach ($ingredientes as $ingrediente)
-		<tr>
-		  <td>
-            <a href="{{ url('/ingrediente/'. $ingrediente->id. '/edit') }}">{{ $ingrediente->nombre }}</a>
+        @foreach ($ventas as $venta)
+		    <tr>
+		      <td>
+            <a href="{{ url('/venta/'. $venta->id. '/edit') }}">{{ $venta->id }}</a>
           </td>
-		      <td> {{ $ingrediente->cantidad }}</td>
-          <td> {{ $ingrediente->precio }}</td>
+		      <td> {{ $venta->created_at }}</td>
+          <td> {{ $venta->subtotal }}</td>
+          <td> {{ $venta->forma_pago }}</td>
+          <td> {{ $venta->iva }}</td>
+          <td> {{ $venta->total }}</td>
+          <td> {{ $venta->numero_mesa }}</td>
+          @if($ventas->estado == false)
+            <td>No</td>
+          @elseif ($mesas->estado == true)
+            <td>Sí</td>
+          @endif  
+          <td> {{ $venta->ci_user }}</td>
+          <td> {{ $venta->id_cliente }}</td>
           <td>
-            <a href="{{route('ingrediente.show',$ingrediente->id)}}"> Ver Ingrediente</a>
-            {{ Form::open(['method' => 'DELETE','route' => ['ingrediente.destroy', $ingrediente->id],'style'=>'display:inline'])}}
+            <a href="{{route('venta.show',$venta->id)}}"> Ver venta</a>
+            {{ Form::open(['method' => 'DELETE','route' => ['venta.destroy', $venta->id],'style'=>'display:inline'])}}
             {{ Form::submit('Eliminar')}}
             {{ Form::close()}}
-		    </td>
-		</tr>
+		      </td>
+		    </tr>
         @endforeach
         </tbody>
       </table>

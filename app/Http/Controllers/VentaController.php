@@ -52,11 +52,30 @@ class VentaController extends Controller
     /*la validación es disparada antes de que se cree el ingrediente*/
     public function store(VentaRequest $request)
     {
-
       $request = $request->all();
       $request['ci_user'] = Auth::id();
 
       Venta::create($request->all());
+
+
+      $nuevaComida->save();
+
+      $ingredientes = $request->input('ingrediente_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
+      $cantidades = $request->input('cantidad');
+
+      foreach($ingredientes as $key => $in_id)
+      {
+        $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $in_id,
+                                                      'id_comida' => $nuevaComida->id, 
+                                                      'cantidad'=> $cantidades[$key]]);
+        $ingrediente_comida->save();
+      }
+
+
+
+
+
+      
 
       flash()->success('La venta ha sido creado');
 
