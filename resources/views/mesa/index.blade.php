@@ -1,24 +1,60 @@
 @extends('app')
 
 @section('content')
+@include ('partials.modals')
 
-	<h1>Mesas</h1>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+	  <h2 style="text-align:center"> MESAS DE MI COMIDA PREDILECTA </h2>
 
-	<hr/>
+      
+      <br>
+      <br>
+      <table class="highlight" id="myTable">
+        <thead>
+            <th>Numero</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </thead>
+        <tbody>
+        @for ($i = 0; $i < sizeof($mesas); $i++)	
+		<tr>
+		  <td>{{$i+1}} </td>
+          
+					@if($mesas[$i]->estado == false)
+						<td>Desocupada</td>
+					@elseif ($mesas[$i]->estado == true)
+						<td>Ocupada</td>
+					@endif	
+         	<td> 
+            {{ Form::open(['method' => 'DELETE','route' => ['mesa.destroy', $mesas[$i]->id],'style'=>'display:inline'])}}
+            {{ Form::submit('Eliminar')}}
+            {{ Form::close()}}
+		    </td>
+		</tr>
+		@endfor
+        </tbody>
+      </table>
+    </div>
+</div>
+	
 
-	@foreach ($mesas as $mesa)
-		<article>
-			<h2>
-				<a href="{{ url('/mesa', $mesa->id) }}">
-					{{ $mesa->nombre }}</a>
-			</h2>
 
-			<div class="id">Mesa:{{ $mesa->id }}</div>
-			@if($mesa->estado == false)
-				<h5>Estado: Desocupado</h5>
-			@endif	
-
-		</article>
-	@endforeach
 
 @stop
+
+@section('scripts')
+
+<script>
+
+  $(document).ready(function(){
+    $('.modal').modal();
+    $('#myTable').DataTable();
+  });
+</script>
+
+@endsection
+
+
+
+

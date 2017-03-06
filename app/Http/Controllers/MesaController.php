@@ -13,6 +13,7 @@ class MesaController extends Controller
     public function index()
     {
     	$mesas = Mesa::latest('created_at')->get();
+      $mesas->toArray();
 
     	return view('mesa.index', compact('mesas'));
     }
@@ -54,5 +55,12 @@ class MesaController extends Controller
 
       $mesa->update($request->all());
       return redirect('mesa');
+    }
+
+    public function destroy($id)
+    {
+      Mesa::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
     }
 }

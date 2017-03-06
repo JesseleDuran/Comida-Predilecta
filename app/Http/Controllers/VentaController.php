@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Venta;
 
 class VentaController extends Controller
 {
@@ -21,12 +22,7 @@ class VentaController extends Controller
 
 
 
-
-
-    public function __construct()
-  {
-      $this->middleware('auth');
-  }
+    
 
     public function index()
     {
@@ -45,8 +41,12 @@ class VentaController extends Controller
 
     public function create()
     {
+
+      $comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
+      $combos = Comida::where('tipo', '=', 'combo')->get();
+      $mesas = Mesa::all();
       
-      return view('venta.create');
+      return view('venta.create', compact('comidas', 'combos', 'mesas'));
     }
 
     /*la validación es disparada antes de que se cree el ingrediente*/

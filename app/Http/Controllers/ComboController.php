@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Comida;
+use App\User;
 use App\Comida_Comida;
 use Illuminate\Http\Request;
 use Input\Input;
 use App\Http\Requests\ComidaRequest;
+use Illuminate\Support\Facades\Redirect;
 
 
 class ComboController extends Controller
@@ -56,6 +58,36 @@ class ComboController extends Controller
       flash()->success('El combo ha sido creado');
    
       return redirect('combo');
+    }
+
+
+    public function edit($id)
+    {
+      $combo = Comida::findOrFail($id);
+      $comidas = \App\Comida::all(); 
+
+
+      return view('combo.edit', compact('combo', 'comidas'));
+    }
+
+    public function update($id, ComidaRequest $request)
+    {
+      $combo = Comida::findOrFail($id);
+
+      $combo->update($request->all());
+
+      $comidas = $combo->comidaCombo; //obtengo los ingredientes de esa combo
+
+      return redirect('combo');
+    }
+
+
+
+    public function destroy($id)
+    {
+      Comida::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
     }
 
     

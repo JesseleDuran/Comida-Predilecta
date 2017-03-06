@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 use App\Ingrediente;
 
 use App\Comida;
+use App\User;
 
 
 class PdfController extends Controller
 {
-    public function __construct()
-    {
-      $this->middleware('auth');
-    }
     
     public function invoice() 
     {
@@ -40,5 +37,14 @@ class PdfController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('pdfCombo');
+    }
+
+    public function pdfUser() 
+    {
+        $users = User::where('admin', 'false')->get();
+        $view =  \View::make('pdf.userPDF', compact('users'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('pdfUser');
     }
 }

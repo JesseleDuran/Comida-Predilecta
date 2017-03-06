@@ -30,27 +30,25 @@
         <tbody>
         @foreach ($comidas as $comida)
 		<tr>
-		  <td>
-            <a href="{{ url('/comida', $comida->id) }}">{{ $comida->nombre }}
+		      <td>
+            <a href="{{ url('/comida/'. $comida->id. '/edit') }}">{{ $comida->nombre }}
           </td>
-		  <td> query </td>
+		      <td> query </td>
           <td> {{ $comida->precio }}</td>
-         <td> {{ $comida->descripcion }}</td> 
-         <td>
+          <td> {{ $comida->descripcion }}</td> 
+          <td>
          	<ul>
-				@foreach ($comida->comidaIngredientes as $ingrediente)
+				    @foreach ($comida->comidaIngredientes as $ingrediente)
 
-					<li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
-				@endforeach
-			</ul>
-		 </td>	
-
-          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Acción</a>
-				  <!-- Sub Menu Accion -->
-			     <ul id='Accion' class='dropdown-content'>
-				      <li><a href="{{url('comida/'.$comida->id.'/edit')}}" class="orange-text">Modificar</a></li>
-				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
+					   <li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
+				    @endforeach
 			     </ul>
+		      </td>	
+          <td>
+          <a href="{{route('comida.show',$comida->id)}}"> Ver Comida</a>
+            {{ Form::open(['method' => 'DELETE','route' => ['comida.destroy', $comida->id],'style'=>'display:inline'])}}
+            {{ Form::submit('Eliminar')}}
+            {{ Form::close()}}
 		    </td>
 		</tr>
         @endforeach

@@ -25,12 +25,13 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('miPerfil', 'EmpleadoController@miPerfil');
+    Route::get('misVentas', 'EmpleadoController@misVentas');
     Route::get('empleado/mesas', 'EmpleadoController@mesas');
-    Route::get('empleado/{{mesa}}/food', 'EmpleadoController@comida');
+    Route::get('empleado/{{mesa}}/food', 'EmpleadoController@showFood');
 
 });
 
-
+Route::resource('venta', 'VentaController');
 
 //ACCESO SOLO PARA ADMINS
 Route::group(['middleware' => 'admin'], function()
@@ -41,10 +42,15 @@ Route::group(['middleware' => 'admin'], function()
     });
 
     Route::resource('ingrediente', 'IngredienteController');
+    Route::resource('user', 'UserController');
 	Route::resource('comida', 'ComidaController');
 	Route::resource('combo', 'ComboController');
     Route::resource('mesa', 'MesaController');
+    Route::resource('ivas', 'IvasController');
+     
 	Route::get('/pdf', 'PdfController@invoice'); //ingredientes
-	Route::get('/pdfComida', 'PdfController@pdfComida');
-	Route::get('/pdfCombo', 'PdfController@pdfCombo');	
+    Route::get('/pdfComida', 'PdfController@pdfComida');
+    Route::get('/pdfCombo', 'PdfController@pdfCombo');  
+    Route::get('/pdfEmpleados', 'PdfController@pdfUser');
+
 });

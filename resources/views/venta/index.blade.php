@@ -5,19 +5,22 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-	  <h2 style="text-align:center"> INGREDIENTES DE MI COMIDA PREDILECTA </h2>
+	  <h2 style="text-align:center"> VENTAS DE MI COMIDA PREDILECTA </h2>
 
       <br>
-      <a href="{{ url('/pdf') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
+      <a href="{{ url('/pdfVenta') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
       <i class="material-icons">insert_chart</i>  
       </button></a> 
       <br>
       <br>
       <table class="highlight" id="myTable">
         <thead>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
+            <th>Realizada en:</th>
+            <th>IVA</th>
+            <th>SubTotal</th>
+            <th>Total</th>
+            <th>Número de Mesa</th>
+            <th>Llevar</th>
 			<th>Acción</th>
         </thead>
         <tbody>
@@ -41,11 +44,6 @@
     </div>
 </div>
 	
-
-
-
-
-
 
 @stop
 

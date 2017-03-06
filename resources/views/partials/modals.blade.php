@@ -48,9 +48,11 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-white">Administrar</a>
               <div class="collapsible-body orange darken-1">
                 <ul>
-                  <li><a href="Empleados.html">Empleados</a></li>
+                  <li><a href="{{ url('/user') }}">Empleados</a></li>
                   <li><a href="Ventas.html">Ventas</a></li>
                   <li><a href="{{ url('/cliente') }}">Clientes</a></li>
+                  <li><a href="{{ url('/mesa') }}">Mesas</a></li>
+                  <li><a href="{{ url('/ivas') }}">Ivas</a></li>
                 </ul>
               </div>
             </li>
@@ -69,7 +71,7 @@
           </ul>
         </li>
         <li class="bold"><a href="Respaldo.html" class="waves-effect waves-white">Generar Respaldo</a></li>
-        <li class="bold"><a href="Mesas.html" class="waves-effect waves-white">Trabajar como Vendedor</a></li>
+        
         </ul>
  <nav>
     <div class="nav-wrapper white">

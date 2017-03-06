@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use Carbon\Carbon;
 use App\Http\Requests\ClienteRequest;
+use Illuminate\Support\Facades\Redirect;
 
 
 class ClienteController extends Controller
 {
-    public function __construct()
-  {
-      $this->middleware('auth');
-  }
 
     public function index()
     {
@@ -59,5 +56,12 @@ class ClienteController extends Controller
 
       $cliente->update($request->all());
       return redirect('cliente');
+    }
+
+    public function destroy($id)
+    {
+      Cliente::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
     }
 }

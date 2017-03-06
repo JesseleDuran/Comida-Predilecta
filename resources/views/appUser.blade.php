@@ -9,6 +9,7 @@
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 </head>
 <body>
 <div class="navbar-fixed"> 
@@ -16,7 +17,7 @@
         <div class="nav-wrapper teal">
             <a href="#!" class="brand-logo center"><i class="material-icons">loyalty</i>Mi Comida Predilecta</a>
             <ul id="datos" class="dropdown-content">
-              <li><a href="PerfilUsuario.html"><i class="material-icons left">equalizer</i>Mis Ventas</a></li>
+              <li><a href="{{ url('/misVentas') }}"><i class="material-icons left">equalizer</i>Mis Ventas</a></li>
               <li class="divider"></li>
               <li><a href="{{ url('/miPerfil') }}"><i class="material-icons left">settings</i>Mi Perfil</a></li>
               <li class="divider"></li>
@@ -39,19 +40,6 @@
               {{ csrf_field() }}
               </form>
                 
-             
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -69,7 +57,7 @@
           <div class="nav-content">
             <ul class="tabs tabs teal">
                 <li class="tab"><a target="_self" href="{{ url('/empleado/mesas') }}" class="white-text">Mesas</a></li>
-                <li class="tab"><a target="_self" class="white-text" href="Food.html">Comida Disponible</a></li>     
+                     
             </ul>     
           </div>
         </div>   
@@ -85,6 +73,7 @@
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
   @yield('scripts')
 

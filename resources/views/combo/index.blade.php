@@ -29,7 +29,7 @@
         @foreach ($combos as $combo)
 		<tr>
 		  <td>
-            <a href="{{ url('/combo', $combo->id) }}">{{ $combo->nombre }}
+            <a href="{{ url('/combo/'. $combo->id. '/edit') }}">{{ $combo->nombre }}
           </td>
 		  <td> query más largo </td>
           <td> {{ $combo->precio }}</td>
@@ -44,12 +44,11 @@
 			</ul>
 		 </td>	
 
-          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Acción</a>
-				  <!-- Sub Menu Accion -->
-			     <ul id='Accion' class='dropdown-content'>
-				      <li><a href="{{url('combo/'.$combo->id.'/edit')}}" class="orange-text">Modificar</a></li>
-				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
-			     </ul>
+          <td>
+            <a href="{{route('combo.show',$combo->id)}}"> Ver Combo</a>
+            {{ Form::open(['method' => 'DELETE','route' => ['combo.destroy', $combo->id],'style'=>'display:inline'])}}
+            {{ Form::submit('Eliminar')}}
+            {{ Form::close()}}
 		    </td>
 		</tr>
         @endforeach

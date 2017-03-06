@@ -152,4 +152,26 @@
 @endif
 
 
+@if ($submitButtonText == 'Actualizar Iva')
+<div class="form-group">
+  {!! Form::label('iva', 'IVA(%):') !!}
+  <!-- atributo, default, otro aributo -->
+  {!! Form::text('iva', null, ['class' => 'form-control']) !!}
+</div>
+
+  <!-- Añade ingrediente -->
+@if ($errors->any())  
+<div class="form-group" onclick="Materialize.toast('ERROR', 4000)">
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+@else
+<div class="form-group">
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+@endif
+
+
+@endif
+
+
 

@@ -8,6 +8,13 @@
     <div class="container">
 	  <h2 style="text-align:center"> CLIENTES DE MI COMIDA PREDILECTA </h2>
       
+      <br>
+      <a href="{{ url('/pdfCliente') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
+      <i class="material-icons">insert_chart</i>  
+      </button></a> 
+      <br>
+      <br>
+
       <table class="highlight" id="myTable">
         <thead>
             <th>Nombre</th>
@@ -16,19 +23,18 @@
         </thead>
         <tbody>
         @foreach ($clientes as $cliente)
-		<tr>
-		  <td>
-            <a href="{{ url('/cliente', $cliente->id) }}">{{ $cliente->nombre }}</a>
+		    <tr>
+		      <td>
+            <a href="{{ url('/cliente/'. $cliente->id. '/edit') }}">{{ $cliente->nombre }}</a>
           </td>
           <td> {{ $cliente->cedula }}</td>
-          <td><a class='dropdown-button btn orange darken-2' href='#' data-activates='Accion'>Accion</a>
-				  <!-- Sub Menu Accion -->
-			     <ul id='Accion' class='dropdown-content'>
-				      <li><a href="{{url('cliente/'.$cliente->id.'/edit')}}" class="orange-text">Modificar</a></li>
-				      <li><a href="#URL PA ELIMINAR" class="orange-text">Eliminar</a></li>
-			     </ul>
-		    </td>
-		</tr>
+          <td>
+            <a href="{{route('cliente.show',$cliente->id)}}"> Ver cliente</a>
+            {{ Form::open(['method' => 'DELETE','route' => ['cliente.destroy', $cliente->id],'style'=>'display:inline'])}}
+            {{ Form::submit('Eliminar')}}
+            {{ Form::close()}}
+		      </td>
+		    </tr>
         @endforeach
         </tbody>
       </table>

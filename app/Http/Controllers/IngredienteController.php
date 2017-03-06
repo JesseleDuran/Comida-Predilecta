@@ -67,6 +67,13 @@ class IngredienteController extends Controller
       return redirect('ingrediente');
     }
 
+    public function destroy($id)
+    {
+      Ingrediente::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
+    }
+
 
 
 

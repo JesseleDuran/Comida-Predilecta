@@ -6,6 +6,7 @@ use App\Comida_Ingrediente;
 use Illuminate\Http\Request;
 use Input\Input;
 use App\Http\Requests\ComidaRequest;
+use Illuminate\Support\Facades\Redirect;
 
 
 class ComidaController extends Controller
@@ -58,6 +59,8 @@ class ComidaController extends Controller
     {
       $comida = Comida::findOrFail($id);
       $ingredientes = \App\Ingrediente::all(); 
+
+
       return view('comida.edit', compact('comida', 'ingredientes'));
     }
 
@@ -67,13 +70,16 @@ class ComidaController extends Controller
 
       $comida->update($request->all());
 
-      $ingredientes = \App\Ingrediente::all(); 
+      $ingredientes = $comida->comidaIngredientes; //obtengo los ingredientes de esa comida
 
       return redirect('comida');
     }
 
-    public function calcularCantidad()
+    public function destroy($id)
     {
-      $cantidad_comidas = DB::table('comida')->select('cantidad')->get();
+      Comida::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
     }
+
 }
