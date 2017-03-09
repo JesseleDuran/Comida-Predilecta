@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
   <link href="/css/yepezchecheeche.css" rel="stylesheet">
+  
 </head>
 <body>
 	
@@ -27,6 +28,10 @@
     <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>	
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script src="js/materialize.js"></script>
+    <script src="/code/highcharts.js"></script>
+    <script src="/code/modules/data.js"></script>
+    <script src="/code/modules/exporting.js"></script>
+    <script src="/code/themes/sand-signika.js"></script>
 	  <!--  Scripts-->
 	
 	@yield('scripts')

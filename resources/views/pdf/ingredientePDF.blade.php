@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Example 2</title>
+    <title>Reporte: INGREDIENTES</title>
     <link rel="stylesheet" type="text/css" href="public/css/yepezchecheeche.css">
   </head>
 <body>
@@ -16,14 +16,14 @@
       <br>
       <br>
 
-      <table width="500px" cellpadding="5px" cellspacing="5px" border="1">
+      <table width="500px" cellpadding="5px" cellspacing="5px" style="text-align:center">
       <tr >
               <th  data-field="name">Nombre</th>
               <th  data-field="cantidad">Cantidad</th>
               <th  data-field="price">Precio</th>
       </tr>
       @foreach ($ingredientes as $ingrediente)
-      <tr color="#fff" bgcolor="#00897B">
+      <tr color="#fff">
             
             <td>{{ $ingrediente->nombre }}</td>
             <td> {{ $ingrediente->cantidad }}</td>

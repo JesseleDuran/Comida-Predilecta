@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Example 2</title>
+    <title>Reporte: EMPLEADOS</title>
     <link rel="stylesheet" type="text/css" href="public/css/yepezchecheeche.css">
   </head>
 <body>
@@ -16,7 +16,7 @@
       <br>
       <br>
 
-      <table width="650px" cellpadding="5px" cellspacing="5px" border="1">
+      <table width="650px" cellpadding="5px" cellspacing="5px" style="text-align:center">
       <tr >
             <th>Nombre</th>
             <th>Cédula</th>
@@ -25,7 +25,7 @@
             <th>Registrado en:</th>
       </tr>
       @foreach ($users as $user)
-      <tr color="#fff" bgcolor="#00897B">
+      <tr color="#fff">
             
           <td>{{ $user->nombre }}</td>
           <td> {{ $user->cedula }}</td>

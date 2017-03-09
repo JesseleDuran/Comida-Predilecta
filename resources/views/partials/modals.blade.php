@@ -59,7 +59,7 @@
             <li class="bold"><a class="collapsible-header waves-effect waves-white">Estadisticas</a>
               <div class="collapsible-body orange darken-1">
                 <ul>
-                  <li><a href="MasVendidoComida.html">Comidas mas vendidas</a></li>
+                  <li><a href="{{ url('/ComidasVendidas') }}">Comidas mas vendidas</a></li>
                   <li><a href="MasVendidoCombo.html">Combos mas vendidos</a></li>
                   <li><a href="MenosVendidoCombo.html">Combos menos vendidos</a></li>
                   <li><a href="MasVendidoMesa.html">Mesas con más ventas</a></li>

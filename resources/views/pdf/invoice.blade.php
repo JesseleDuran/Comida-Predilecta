@@ -14,7 +14,7 @@
           <div class="date">Date of Invoice: {{ $date }}</div>
         </div>
       </div>
-      <table border="0" cellspacing="0" cellpadding="0">
+      <table border="0" cellspacing="0" cellpadding="0" style="text-align:center">
         <thead>
           <tr>
             <th class="no">#</th>

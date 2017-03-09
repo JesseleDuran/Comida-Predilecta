@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class IngredienteController extends Controller
 {
-
- 
-
     public function index()
     {
     	$ingredientes = Ingrediente::latest('created_at')->get();

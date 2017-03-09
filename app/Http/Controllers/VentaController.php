@@ -42,7 +42,7 @@ class VentaController extends Controller
     public function create()
     {
 
-      $comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
+      $comidas = Comida::where('tipo', '=', 'comida')->get();
       $combos = Comida::where('tipo', '=', 'combo')->get();
       $mesas = Mesa::all();
       
@@ -52,30 +52,50 @@ class VentaController extends Controller
     /*la validación es disparada antes de que se cree el ingrediente*/
     public function store(VentaRequest $request)
     {
-      $request = $request->all();
-      $request['ci_user'] = Auth::id();
 
-      Venta::create($request->all());
+      //seteo el empleado que inició sesión
+      $request->merge(['ci_user' => Auth::id()]);
 
+      //obtengo la fila del tipo de pago, para obtener su IVA
+      $ivaCategorizado = Ivas::where('tipo_pago', '=', $request->forma_pago)->first();
 
-      $nuevaComida->save();
+      //seteo el Iva correspondiente a la forma de pago
+      $request->merge(['iva' => $ivaCategorizado->iva]);
 
-      $ingredientes = $request->input('ingrediente_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
-      $cantidades = $request->input('cantidad');
+      //obtengo la cédula del cliente
+      $CI_cliente = $request->input('ci_cliente');
 
-      foreach($ingredientes as $key => $in_id)
+      //Chequeo si existe, almacenando en una variable
+      $cliente = Cliente::where('ci', '=', $CI_cliente)->first();
+
+      //si es nulo, crearlo
+      if ($cliente == null) 
       {
-        $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $in_id,
-                                                      'id_comida' => $nuevaComida->id, 
-                                                      'cantidad'=> $cantidades[$key]]);
-        $ingrediente_comida->save();
+        $comprador = new Cliente(['ci' => $CI_cliente, 'nombre' => $request->nombreCliente]);
+        $comprador->save();
+        $request->merge(['id_cliente' => $comprador->id]);
+      }
+      else
+      {
+        $request->merge(['id_cliente' => $cliente->id]);
       }
 
+      $datos_venta = $request->only('subtotal', 'total', 'ci_user', 'iva', 
+                                    'id_cliente', 'numero_mesa', 'llevar', 'forma_pago');
 
+      $ventaNueva = Venta::create($datos_venta);      
+      $ventaNueva->save();
 
+      $comidas = $request->input('comida_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
+      $cantidades = $request->input('cantidad');
 
-
-      
+      foreach($comidas as $key => $food_id)
+      {
+        $comida_venta = new Comida_Venta(['id_comida' => $food_id,
+                                          'id_venta' => $nuevaVenta->id, 
+                                          'cantidad'=> $cantidades[$key]]);
+        $ingrediente_comida->save();
+      }
 
       flash()->success('La venta ha sido creado');
 

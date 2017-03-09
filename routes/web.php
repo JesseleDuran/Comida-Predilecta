@@ -28,6 +28,10 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('misVentas', 'EmpleadoController@misVentas');
     Route::get('empleado/mesas', 'EmpleadoController@mesas');
     Route::get('empleado/{{mesa}}/food', 'EmpleadoController@showFood');
+    Route::get('/food', function ()
+    {
+        return view('empleado.food');
+    });
 
 });
 
@@ -54,5 +58,10 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('/pdfEmpleados', 'PdfController@pdfUser');
     Route::get('/pdfVenta', 'PdfController@pdfVentas');
     Route::get('/pdfCliente', 'PdfController@pdfClientes');
+
+    Route::get('/ComidasVendidas', function()
+    {
+        return view('graficos.grafico');       
+    });
 
 });

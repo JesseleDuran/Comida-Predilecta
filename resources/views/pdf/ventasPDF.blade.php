@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Example 2</title>
+    <title>Reporte: VENTAS</title>
     <link rel="stylesheet" type="text/css" href="public/css/yepezchecheeche.css">
   </head>
 <body>
@@ -16,7 +16,7 @@
       <br>
       <br>
 
-      <table width="600px" cellpadding="5px" cellspacing="5px" border="1">
+      <table width="600px" cellpadding="5px" cellspacing="5px" style="text-align:center">
       <tr >
              <th>Código</th>
             <th>Fecha</th>
@@ -30,7 +30,7 @@
             <th>CI del Comprador</th>
       </tr>
       @foreach ($ventas as $venta)
-      <tr color="#fff" bgcolor="#00897B">
+      <tr color="#fff" >
             
           <td>{{ $venta->id }}</td>
           <td> {{ $venta->created_at }}</td>

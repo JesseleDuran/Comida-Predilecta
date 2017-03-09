@@ -8,7 +8,7 @@
 	  <h2 style="text-align:center"> INGREDIENTES DE MI COMIDA PREDILECTA </h2>
 
       <br>
-      <a href="{{ url('/pdf') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
+      <a href="{{ url('/pdf') }}"><button class="btn center waves-effect waves-light" type="submit" name="action" target="_blank">Descargar Reporte
       <i class="material-icons">insert_chart</i>  
       </button></a> 
       <br>
@@ -24,7 +24,7 @@
         @foreach ($ingredientes as $ingrediente)
 		<tr>
 		  <td>
-            <a href="{{ url('/ingrediente/'. $ingrediente->id. '/edit') }}">{{ $ingrediente->nombre }}</a>
+          <a href="{{ url('/ingrediente/'. $ingrediente->id. '/edit') }}">{{ $ingrediente->nombre }}</a>
           </td>
 		      <td> {{ $ingrediente->cantidad }}</td>
           <td> {{ $ingrediente->precio }}</td>
@@ -40,12 +40,6 @@
       </table>
     </div>
 </div>
-	
-
-
-
-
-
 
 @stop
 
@@ -57,6 +51,7 @@
     $('.modal').modal();
     $('#myTable').DataTable();
   });
+  
 </script>
 
 @endsection
