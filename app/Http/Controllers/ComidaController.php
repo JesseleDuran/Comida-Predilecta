@@ -14,7 +14,7 @@ class ComidaController extends Controller
 
     public function index()
     {
-    	$comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
+    	$comidas = Comida::where('tipo', '=', 'comida')->get();
 
     	return view('comida.index', compact('comidas'));
     }
@@ -80,6 +80,27 @@ class ComidaController extends Controller
       Comida::find($id)->delete();
 
       return Redirect::back()->with('message','Operation Successful !');
+    }
+
+    public function deleteComidaIngrediente($id_comida, $id_ingrediente)
+    {
+        $relacion = Comida_Ingrediente::where([
+                    ['id_ingrediente', '=', $id_ingrediente],
+                    ['id_comida', '=', $id_comida],
+                    ])->first();
+        $relacion->delete();
+
+        return Redirect::back();
+    }
+
+    public function addComidaIngrediente($id_comida, $id_ingrediente, $cantidad)
+    {
+        $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $id_ingrediente,
+                                                      'id_comida' => $id_comida, 
+                                                      'cantidad'=> $cantidad]);
+        $ingrediente_comida->save();
+        return redirect('comida');
+
     }
 
 }

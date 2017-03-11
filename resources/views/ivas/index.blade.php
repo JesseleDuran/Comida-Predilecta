@@ -5,9 +5,7 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-	  <h2 style="text-align:center"> IVAS DE MI COMIDA PREDILECTA </h2>
-
-      
+	  <h2 style="text-align:center"> IVA DE MI COMIDA PREDILECTA </h2>
       <br>
       <br>
       <table class="highlight" id="myTable">

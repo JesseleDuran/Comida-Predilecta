@@ -52,7 +52,7 @@
                   <li><a href="{{ url('/venta') }}">Ventas</a></li>
                   <li><a href="{{ url('/cliente') }}">Clientes</a></li>
                   <li><a href="{{ url('/mesa') }}">Mesas</a></li>
-                  <li><a href="{{ url('/ivas') }}">Ivas</a></li>
+                  <li><a href="{{ url('/ivas') }}">Iva</a></li>
                 </ul>
               </div>
             </li>

@@ -27,7 +27,7 @@
               <p>Administre El manejo de su Restaurante</p>
             </div>
             <div class="card-action">
-              <a href="Empleados.html">Vamos!</a>
+              <a href="{{ url('/user') }}">Vamos!</a>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
               <p>Vea y Analice sus Estadisticas de Ventas</p>
             </div>
             <div class="card-action">
-              <a href="MasVendidoComida.html">Vamos!</a>
+              <a href="{{ url('/ComidasVendidas') }}">Vamos!</a>
             </div>
           </div>
         </div>   	  
