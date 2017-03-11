@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Mesa;
 use App\User;
 use App\Venta;
+use App\Comida;
 
 class EmpleadoController extends Controller
 {
     public function mesas()
     {
-    	$mesas = Mesa::latest('created_at')->get();
+    	$mesas = Mesa::all();
         $mesas->toArray();
         $empleado = User::where('cedula' ,Auth::id())->first();
 
@@ -37,11 +38,15 @@ class EmpleadoController extends Controller
     }
 
 
-    public function showFood($mesa)
+    public function showFood($id)
   	{
   		$mesa = Mesa::findOrFail($id);
         $empleado = User::where('cedula' ,Auth::id())->first();
+        $combos = Comida::where('tipo', '=', 'combo')->get();
+        $comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
 
-  		return view('empleado.comidaDisponible', compact('mesa'));
+  		return view('empleado.food', compact('empleado', 'mesa', 'comidas', 'combos'));
   	}
+
+
 }

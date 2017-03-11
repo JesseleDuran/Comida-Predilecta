@@ -60,11 +60,10 @@
               <div class="collapsible-body orange darken-1">
                 <ul>
                   <li><a href="{{ url('/ComidasVendidas') }}">Comidas mas vendidas</a></li>
-                  <li><a href="MasVendidoCombo.html">Combos mas vendidos</a></li>
-                  <li><a href="MenosVendidoCombo.html">Combos menos vendidos</a></li>
-                  <li><a href="MasVendidoMesa.html">Mesas con más ventas</a></li>
-                  <li><a href="PredilectaHora.html">Horas Predilectas</a></li>
-                  <li><a href="PredilectaDiaMes.html">Dia del mes Predilecto</a></li>
+                  <li><a href="{{ url('/CombosVendidos') }}">Combos mas vendidos</a></li>
+                  <li><a href="{{ url('/MesasVentas') }}">Mesas con más ventas</a></li>
+                  <li><a href="{{ url('/HorasVentas') }}">Horas con más ventas</a></li>
+                  <li><a href="{{ url('/DiasVentas') }}">Dia con más ventas</a></li>
                 </ul>
               </div>
             </li>

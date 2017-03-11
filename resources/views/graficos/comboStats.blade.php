@@ -6,7 +6,7 @@
 
 <div class="container">
 	<br><br>
-	<h2 style="text-align:center"> COMIDAS MÁS VENDIDAS DE MI COMIDA PREDILECTA</h2>
+	<h2 style="text-align:center"> COMBOS MÁS VENDIDOS DE MI COMIDA PREDILECTA</h2>
 	<br>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			<table id="datatable">
@@ -17,10 +17,10 @@
 						</tr>
 				</thead>
 				<tbody>
-					@foreach ($comidasVendidas as $comida)
+					@foreach ($combosVendidos as $combo)
 					<tr>
-						<th>{{$comida->nombre}}</th>
-						<td>{{$comida->suma_cantidad}}</td>
+						<th>{{$combo->nombre}}</th>
+						<td>{{$combo->suma_cantidad}}</td>
 					</tr>
 					@endforeach
 				</tbody>
@@ -48,7 +48,7 @@ $(document).ready(function ()
 					type: 'column'
 				},
 				title: {
-					text: 'Comidas más vendidas'
+					text: 'Combos más vendidos'
 				},
 				yAxis: {
 					allowDecimals: false,

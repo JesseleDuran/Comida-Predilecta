@@ -27,7 +27,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>	
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="js/materialize.js"></script>
+    <script src="/js/materialize.js"></script>
     <script src="/code/highcharts.js"></script>
     <script src="/code/modules/data.js"></script>
     <script src="/code/modules/exporting.js"></script>

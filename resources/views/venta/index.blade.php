@@ -24,7 +24,7 @@
             <th>Número de Mesa</th>
             <th>Llevar</th>
             <th>CI del Empleado</th>
-            <th>CI del Comprador</th>
+            <th>ID del Comprador</th>
 			      <th>Acción</th>
         </thead>
         <tbody>
@@ -39,9 +39,9 @@
           <td> {{ $venta->iva }}</td>
           <td> {{ $venta->total }}</td>
           <td> {{ $venta->numero_mesa }}</td>
-          @if($ventas->estado == false)
+          @if($venta->llevar == false)
             <td>No</td>
-          @elseif ($mesas->estado == true)
+          @elseif ($venta->llevar == true)
             <td>Sí</td>
           @endif  
           <td> {{ $venta->ci_user }}</td>

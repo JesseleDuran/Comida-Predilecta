@@ -1,24 +1,70 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EstadisticasController extends Controller
 {
     public function comidasVendidas()
     {
-    	$comida_venta = Comida_Venta::all();
 
-    	$comidasVendidas = Comida::where('id', '=', $comida_venta->id_comida)->get(); //obtengo las comidas que han sido compradas
+       $comidasVendidas = DB::table('comida_venta')
+                          ->select(DB::raw('sum(comida_venta.cantidad) AS suma_cantidad, comida.nombre'))
+                          ->join('comida', 'comida_venta.id_comida', '=', 'comida.id')->where('tipo', 'comida') //asi .. el select siempre arriba! 
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('comida.nombre')
+                          ->get();
 
-    	//cálcular cuántas veces se han comprado las comidas compradas
-    	foreach($comidasVendidas->id as $key => $co_id)
-      	{
-      		$cantidad
-        	
-      	}
+    	 return view('graficos.grafico', compact('comidasVendidas'));
+    }
 
-    	return view('comida.index', compact('comidas'));
+    public function combosVendidos()
+    {
+       $combosVendidos = DB::table('comida_venta')
+                          ->select(DB::raw('sum(comida_venta.cantidad) AS suma_cantidad, comida.nombre'))
+                          ->join('comida', 'comida_venta.id_comida', '=', 'comida.id')->where('tipo', 'combo') //asi .. el select siempre arriba! 
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('comida.nombre')
+                          ->get();
+
+       return view('graficos.comboStats', compact('combosVendidos'));
+    }
+
+    public function mesasVentas()
+    {
+
+       $mesasVentas = DB::table('venta')
+                          ->select(DB::raw('count(*) AS suma_cantidad, mesa.id'))
+                          ->join('mesa', 'venta.numero_mesa', '=', 'mesa.id') //asi .. el select siempre arriba! 
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('mesa.id')
+                          ->get();
+
+       return view('graficos.mesasStats', compact('mesasVentas'));
+    }
+
+    public function horasVentas()
+    {
+
+       $horasVentas = DB::table('venta')
+                          ->select(DB::raw('EXTRACT(hour from venta.created_at) as hora'), DB::raw('count(*) as suma_cantidad'))
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('hora')
+                          ->get();
+
+       return view('graficos.horasStats', compact('horasVentas'));
+    }
+
+    public function diasVentas()
+    {
+
+       $diasVentas = DB::table('venta')
+                          ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as suma_cantidad'))
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('date')
+                          ->get();
+
+       return view('graficos.diasStats', compact('diasVentas'));
     }
 }
