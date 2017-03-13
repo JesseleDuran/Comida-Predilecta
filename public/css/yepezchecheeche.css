@@ -58,3 +58,11 @@ select {
 .blue-grey.darken-1 {
     background-color: #009688 !important;
 }
+.container-comida {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+label {
+    font-size: 1rem !important;
+}

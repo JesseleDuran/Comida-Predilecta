@@ -70,6 +70,8 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('comida/{id_comida}/deleteComidaIngrediente/{id_ingrediente}', 'ComidaController@deleteComidaIngrediente');
 
     Route::get('combo/{id_combo}/deleteComboComida/{id_comida}', 'ComboController@deleteComboComida');
+
+     Route::get('venta/{id_venta}/deleteComidaVenta/{id_comida}', 'VentaController@deleteVentaComida');
     
 
 

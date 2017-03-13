@@ -10,6 +10,7 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/css/front-usuario.css" rel="stylesheet">
+
 </head>
 <body>
     
@@ -59,7 +60,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="amber-text">Password</label>
+                            <label for="password" class="amber-text">Contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -77,7 +78,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn-large waves-effect waves-light amber">
-                                    Login
+                                    Iniciar Sesión
                                 </button>
                             </div>
                         </div>

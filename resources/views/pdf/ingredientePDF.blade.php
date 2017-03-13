@@ -9,11 +9,9 @@
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-	  <h2 style="text-align:center"> INGREDIENTES DE MI COMIDA PREDILECTA </h2>
-
-      <br>
-
-      <br>
+    <h2 style="text-align:center">Reporte de Ingredientes de MI COMIDA PREDILECTA a la fecha: 5/03/2017 </h2>  
+	  <br>
+    <h3 style="text-align:center"> Ingredientes de MI COMIDA PREDILECTA </h3>
       <br>
 
       <table width="500px" cellpadding="5px" cellspacing="5px" style="text-align:center">

@@ -31,18 +31,18 @@
 
 @if ($submitButtonText == 'Añadir Comida')
 
-<div class="form-group">
+<div class="form-group input-field col s6">
 	{!! Form::label('nombre', 'Nombre:') !!}
 	<!-- atributo, default, otro aributo -->
 	{!! Form::text('nombre', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group">
-	{!! Form::label('descripcion', 'descripcion:') !!}
+<div class="form-group input-field col s6">
+	{!! Form::label('descripcion', 'Descripción:') !!}
 	{!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group">
+<div class="form-group input-field col s6">
 	{!! Form::label('precio', 'Precio:') !!}
 	{!! Form::text('precio', null, ['class' => 'form-control']) !!}
 </div>
@@ -146,18 +146,18 @@
 
 @if ($submitButtonText == 'Añadir Combo')
 
-<div class="form-group">
+<div class="form-group input-field col s6">
   {!! Form::label('nombre', 'Nombre:') !!}
   <!-- atributo, default, otro aributo -->
   {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group">
-  {!! Form::label('descripcion', 'descripcion:') !!}
+<div class="form-group input-field col s6">
+  {!! Form::label('descripcion', 'Descripción:') !!}
   {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group">
+<div class="form-group input-field col s6">
   {!! Form::label('precio', 'Precio:') !!}
   {!! Form::text('precio', null, ['class' => 'form-control']) !!}
 </div>
@@ -214,9 +214,9 @@
       
      <div class="row" id="ingrediente_wrapper">
         <div class="row">
-              <select name="comida[0]" id='comida[0]'>
-                      <option value="{{$comida->comida->id}}">{{$comida->comida->nombre}}</option>
-                </select>
+
+                      <h5>{{$comida->comida->nombre}}</h5>
+                
           <p class="col m2">Cantidad:</p>
           <input class="col m2" type="number" disabled value= "{{$comida->cantidad}}">
           <a href="deleteComboComida/{{$comida->comida->id}}" class="col m2 remove_field">Remove</a>
@@ -310,55 +310,114 @@
 
 
 @if ($submitButtonText == 'Actualizar Venta')
+<div class="row">
+<div class="input-field col s4">
 <div class="form-group">
+
   {!! Form::label('created_at', 'Fecha de Creación:') !!}
   <!-- atributo, default, otro aributo -->
   {!! Form::text('created_at', null, ['class' => 'form-control']) !!}
 </div>
+</div>
 
+<div class="input-field col s4">
 <div class="form-group">
   {!! Form::label('subtotal', 'Subtotal:') !!}
   {!! Form::text('subtotal', null, ['class' => 'form-control']) !!}
 </div>
-
-<div class="form-group">
-  {!! Form::label('iva', 'IVA(%):') !!}
-  {!! Form::text('iva', null, ['class' => 'form-control']) !!}
+</div>
 </div>
 
-<div class="form-group">
-  {!! Form::label('total', 'Total:') !!}
-  {!! Form::text('total', null, ['class' => 'form-control']) !!}
+<div class="row">
+  <div class="input-field col s4">
+    <div class="form-group">
+      {!! Form::label('iva', 'IVA(%):') !!}
+      {!! Form::text('iva', null, ['class' => 'form-control']) !!}
+    </div>
+  </div>
+  <div class="input-field col s4">
+    <div class="form-group">
+      {!! Form::label('total', 'Total:') !!}
+      {!! Form::text('total', null, ['class' => 'form-control']) !!}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s4">
+      <div class="form-group">
+        {!! Form::label('forma_pago', 'Tipo de Pago:') !!}
+        {!! Form::text('forma_pago', null, ['class' => 'form-control']) !!}
+      </div>
+   </div>   
+    <div class="input-field col s4">
+      <div class="form-group">
+        {!! Form::label('llevar', 'Llevar:') !!}
+        {!! Form::text('llevar', null, ['class' => 'form-control']) !!}
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s4">
+      <div class="form-group">
+        {!! Form::label('numero_mesa', 'Número de Mesa:') !!}
+        {!! Form::text('numero_mesa', null, ['class' => 'form-control']) !!}
+      </div>
+    </div>
+  <div class="input-field col s4">
+    <div class="form-group">
+      {!! Form::label('ci_user', 'Cédula del empleado:') !!}
+      {!! Form::text('ci_user', null, ['class' => 'form-control']) !!}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s8">  
+  <div class="form-group">
+    {!! Form::label('id_cliente', 'ID del Cliente:') !!}
+    {!! Form::text('id_cliente', null, ['class' => 'form-control']) !!}
+  </div>
+</div>
 </div>
 
-<div class="form-group">
-  {!! Form::label('forma_pago', 'Tipo de Pago:') !!}
-  {!! Form::text('forma_pago', null, ['class' => 'form-control']) !!}
+@foreach ($venta->comidaVenta as $comida)
+      
+     <div class="row" id="ingrediente_wrapper">
+        <div class="row">
+              <select name="comida[0]" id='comida[0]'>
+                      <option value="{{$comida->comida->id}}">{{$comida->comida->nombre}}</option>
+                </select>
+          <p class="col m2">Cantidad:</p>
+          <input class="col m2" type="number" disabled value= "{{$comida->cantidad}}">
+          <a href="deleteComidaVenta/{{$comida->comida->id}}" class="col m2 remove_field">Remove</a>
+        </div>
+</div>
+@endforeach
+
+<div class="col m12">
+        <div class="col m6">
+              <h4>comidas</h4>
+        </div>
+        <div class="col m6">
+          <a class="waves-effect waves-light btn" id="add_comida" name="add_comida">Añadir comida</a>
+        </div>
+      </div>
+     <div class="row" id="comida_wrapper">
+        <div class="row">
+          <p class="col m2">comidas:</p>
+              <select name="comida_id[0]" id='comida_id[0]'>
+                @foreach ($comidas as $in)
+                      <option value="{{$in->id}}">{{$in->nombre}}</option>
+                    @endforeach
+                </select>
+          <p class="col m2">Cantidad:</p>
+          <input class="col m2" type="number"  name="cantidad[0]" id='cantidad[0]'>
+          <a href="#" class="col m2 remove_field">Remove</a>
+        </div>
 </div>
 
-<div class="form-group">
-  {!! Form::label('llevar', 'Llevar:') !!}
-  {!! Form::text('llevar', null, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
-  {!! Form::label('numero_mesa', 'Número de Mesa:') !!}
-  {!! Form::text('numero_mesa', null, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
-  {!! Form::label('ci_user', 'Cédula del empleado:') !!}
-  {!! Form::text('ci_user', null, ['class' => 'form-control']) !!}
-</div>
-
-<div class="form-group">
-  {!! Form::label('id_cliente', 'ID del Cliente:') !!}
-  {!! Form::text('id_cliente', null, ['class' => 'form-control']) !!}
-</div>
 
 
-
-  <!-- Añade ingrediente -->
+  <!-- Añade venta -->
 @if ($errors->any())  
 <div class="form-group" >
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
@@ -368,6 +427,8 @@
   {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>
 @endif
+
+
 
 
 @endif

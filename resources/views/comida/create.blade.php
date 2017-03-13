@@ -1,8 +1,8 @@
 @extends('app')
 
-@section('content')
+@section('contenido')
 
-	<h1>Ingrese una nueva Comida</h1>
+	<h1 style="text-align:center">Ingrese una nueva Comida</h1>
 	@include ('errors.list')
 	<hr/>
 

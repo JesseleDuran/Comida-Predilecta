@@ -2,9 +2,13 @@
 
 @section('content')
 
-	<h1>Venta: {{ $venta->id }}</h1>
+	<h1 style="text-align:center">Venta: {{ $venta->id }}</h1>
 
-
+<div class="cointainer valign-wrapper">
+     <div class="row">
+      <div class="col s12">
+        <div class="card-panel">
+          <span class="black-text">
             <h5> Compra: </h5>
 
             <ul>
@@ -33,7 +37,13 @@
             <h5>CI del Empleado</h5>
              <p> {{ $venta->ci_user }}</p>
             <h5>ID del Comprador</h5>
-             <p> {{ $venta->id_cliente }}</p>
+             <p> {{ $venta->id_cliente }}</p>            
+          </span>
+        </div>
+      </div>
+    </div> 
+</div>  
+
             
    
     

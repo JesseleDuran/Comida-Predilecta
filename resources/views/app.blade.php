@@ -20,6 +20,10 @@
 		@yield('content')
 	</div>
 
+  <div class="container-comida"> 
+    @yield('contenido')
+  </div>
+
 	  <!--  Scripts-->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>

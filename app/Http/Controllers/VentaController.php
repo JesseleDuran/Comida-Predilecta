@@ -53,15 +53,8 @@ class VentaController extends Controller
     public function edit($id)
     {
       $venta = Venta::findOrFail($id);
-      return view('venta.edit', compact('venta'));
-    }
-
-    public function update($id, VentaRequest $request)
-    {
-      $venta = Venta::findOrFail($id);
-
-      $venta->update($request->all());
-      return redirect('venta');
+      $comidas = Comida::all();
+      return view('venta.edit', compact('venta','comidas'));
     }
 
   public function guardarVenta(Request $request)
@@ -151,6 +144,37 @@ class VentaController extends Controller
       Venta::find($id)->delete();
 
       return Redirect::back()->with('message','Operation Successful !');
+    }
+
+
+    public function deleteVentaComida($id_venta, $id_comida)
+    {
+        $relacion = Comida_Venta::where([
+                    ['id_venta', '=', $id_venta],
+                    ['id_comida', '=', $id_comida],
+                    ])->first();
+        $relacion->delete();
+
+        return Redirect::back();
+    }
+
+    public function update($id, VentaRequest $request)
+    {
+      $venta = Venta::findOrFail($id);
+      $venta->update($request->all());
+
+      $comidas = $request->input('comida_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
+      $cantidades = $request->input('cantidad');
+
+      foreach($comidas as $key => $co_id)
+      {
+        $comida_venta = new Comida_Venta(['id_venta' => $venta->id,
+                                                      'id_comida' => $co->id, 
+                                                      'cantidad'=> $cantidades[$key]]);
+        $comida_venta->save();
+      }
+
+      return redirect('venta');
     }
 }
 
