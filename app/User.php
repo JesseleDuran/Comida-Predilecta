@@ -12,7 +12,7 @@ class User extends Authenticatable
     public $incrementing = false;
 
     protected $attributes = array(
-        'admin' => 'false'
+        'admin' => 'true'
     );
 
     /**

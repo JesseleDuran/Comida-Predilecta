@@ -6,7 +6,7 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
 	  <h2 style="text-align:center"> INGREDIENTES DE MI COMIDA PREDILECTA </h2>
-
+    {{Html::ul($errors->all())}}
       <br>
       <a href="{{ url('/pdf') }}"><button class="btn center waves-effect waves-light" type="submit" name="action" target="_blank">Descargar Reporte
       <i class="material-icons">insert_chart</i>  
@@ -24,7 +24,7 @@
         @foreach ($ingredientes as $ingrediente)
 		<tr>
 		  <td>
-          <a href="{{ url('/ingrediente/'. $ingrediente->id. '/edit') }}">{{ $ingrediente->nombre }}</a>
+          <a title="Presiona para editar" href="{{ url('/ingrediente/'. $ingrediente->id. '/edit') }}">{{ $ingrediente->nombre }} </a>
           </td>
 		      <td> {{ $ingrediente->cantidad }}</td>
           <td> {{ $ingrediente->precio }}</td>

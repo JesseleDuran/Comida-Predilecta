@@ -24,10 +24,10 @@
               <th  data-field="price">Descripcion</th>
               <th  data-field="price">Comidas</th>
       </tr>
-      @foreach ($combos as $combo)
+      @foreach ($combos as $key => $combo)
       <tr color="#fff" >           
             <td>{{ $combo->nombre }}</td>
-            <td> query mas largo</td>
+            <td> {{ $arreglo[$key] }}</td>
             <td>{{ $combo->precio }}</td>
             <td>{{ $combo->descripcion }}  </td> 
             <td>

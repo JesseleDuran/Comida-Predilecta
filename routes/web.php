@@ -27,7 +27,9 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('miPerfil', 'EmpleadoController@miPerfil');
     Route::get('misVentas', 'EmpleadoController@misVentas');
     Route::get('empleado/mesas', 'EmpleadoController@mesas');
+     Route::get('/empleado/llevar/comida', 'EmpleadoController@showFoodLlevar');
     Route::get('/empleado/{mesa}/food', 'EmpleadoController@showFood');
+
     Route::post('/guardarVenta', 'VentaController@guardarVenta');
     Route::post('/cambiarEstadoMesa', 'MesaController@cambiarEstado');
 
@@ -62,10 +64,13 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('/MesasVentas', 'EstadisticasController@mesasVentas');
     Route::get('/HorasVentas', 'EstadisticasController@horasVentas');
     Route::get('/DiasVentas', 'EstadisticasController@diasVentas');
+    Route::get('/CrearEmpleado', 'EmpleadoController@create');
 
 
     Route::get('comida/{id_comida}/deleteComidaIngrediente/{id_ingrediente}', 'ComidaController@deleteComidaIngrediente');
-    Route::get('addComidaIngrediente/{id_comida}/{id_ingrediente}', 'ComidaController@addComidaIngrediente');
+
+    Route::get('combo/{id_combo}/deleteComboComida/{id_comida}', 'ComboController@deleteComboComida');
+    
 
 
 

@@ -13,16 +13,21 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>Cantidad de ventas</th>
+						@foreach ($mesasVentas as $mesa)
+						<th>Cantidad de ventas en la Mesa {{$mesa->id}}</th>
+						@endforeach
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($mesasVentas as $mesa)
+
+					
 					<tr>
-						<th>Mesa: {{$mesa->id}}</th>
+						<th>Cantidad</th>
+						@foreach ($mesasVentas as $mesa)
 						<td>{{$mesa->suma_cantidad}}</td>
+						@endforeach
 					</tr>
-					@endforeach
+					
 				</tbody>
 			</table>
 		<br>

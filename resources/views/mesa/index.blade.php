@@ -7,13 +7,8 @@
     <div class="container">
 	  <h2 style="text-align:center"> MESAS DE MI COMIDA PREDILECTA </h2>
 
-    
-
-
-
       {{Html::ul($errors->all())}}
 
-      
       <br>
       <br>
       <table class="highlight" id="myTable">
@@ -25,7 +20,7 @@
         <tbody>
         @for ($i = 0; $i < sizeof($mesas); $i++)	
 		<tr>
-		  <td>{{$i+1}} </td>
+		  <td>{{$mesas[$i]->id}} </td>
           
 					@if($mesas[$i]->estado == false)
 						<td>Desocupada</td>

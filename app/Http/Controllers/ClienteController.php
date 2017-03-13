@@ -60,8 +60,14 @@ class ClienteController extends Controller
 
     public function destroy($id)
     {
-      Cliente::find($id)->delete();
-
-      return Redirect::back()->with('message','Operation Successful !');
+      try 
+      {
+        Cliente::find($id)->delete();
+        return Redirect::back()->with('message','Operation Successful !');
+      }
+       catch (\Illuminate\Database\QueryException $qe) 
+      {
+          return redirect()->back()->withErrors(['No puede eliminar un Cliente con Ventas ya realizadas']);
+      }
     }
 }

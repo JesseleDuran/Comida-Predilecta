@@ -66,9 +66,16 @@ class IngredienteController extends Controller
 
     public function destroy($id)
     {
-      Ingrediente::find($id)->delete();
-
-      return Redirect::back()->with('message','Operation Successful !');
+      try 
+      {
+        Ingrediente::find($id)->delete();
+        return Redirect::back()->with('message','Operation Successful !');
+      }
+      
+      catch (\Illuminate\Database\QueryException $qe) 
+      {
+          return redirect()->back()->withErrors(['No puede eliminar un ingrediente que está siendo utilizado por una Comida']);
+      }
     }
 
 

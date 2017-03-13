@@ -8,7 +8,7 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
 	  <h2 style="text-align:center"> COMIDAS Y BEBIDAS DE MI COMIDA PREDILECTA </h2>
-
+    {{Html::ul($errors->all())}}
       <br>
       <a href="{{ url('/pdfComida') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
       <i class="material-icons">insert_chart</i>  
@@ -31,7 +31,7 @@
         @foreach($comidas as $key => $comida)  
 		<tr>
 		      <td>
-            <a href="{{ url('/comida/'. $comida->id. '/edit') }}">{{ $comida->nombre }}
+            <a title="Presiona para editar" href="{{ url('/comida/'. $comida->id. '/edit') }}">{{ $comida->nombre }}
           </td>
 		      <td> {{ $arreglo[$key]->cant_posible }} </td>
           <td> {{ $comida->precio }}</td>

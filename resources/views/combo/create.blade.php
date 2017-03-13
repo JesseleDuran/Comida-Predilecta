@@ -3,14 +3,14 @@
 @section('content')
 
 	<h1>Ingrese un nuevo Combo</h1>
-	
+	@include ('errors.list')
 	<hr/>
 
 	{!! Form::open(['url' => 'combo']) !!}
 		@include ('partials.form', ['submitButtonText' => 'Añadir Combo'])
 	{!! Form::close() !!}
 
-	@include ('errors.list')
+
 
 @stop
 

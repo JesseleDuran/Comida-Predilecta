@@ -7,7 +7,7 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
 	  <h2 style="text-align:center"> CLIENTES DE MI COMIDA PREDILECTA </h2>
-      
+      {{Html::ul($errors->all())}}
       <br>
       <a href="{{ url('/pdfCliente') }}"><button class="btn center waves-effect waves-light" type="submit" name="action">Descargar Reporte
       <i class="material-icons">insert_chart</i>  
@@ -27,7 +27,7 @@
 		    <tr>
           <td> {{ $cliente->id }}</td>
 		      <td>
-            <a href="{{ url('/cliente/'. $cliente->id. '/edit') }}">{{ $cliente->nombre }}</a>
+            <a title="Presiona para editar" href="{{ url('/cliente/'. $cliente->id. '/edit') }}">{{ $cliente->nombre }}</a>
           </td>
           <td> {{ $cliente->cedula }}</td>
           <td>

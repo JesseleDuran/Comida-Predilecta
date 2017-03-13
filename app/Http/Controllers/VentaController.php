@@ -12,6 +12,7 @@ use App\Comida_Venta;
 use App\Mesa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\VentaRequest;
 
 
 class VentaController extends Controller
@@ -33,6 +34,8 @@ class VentaController extends Controller
 
       return view('venta.show', compact('venta', 'empleado'));
     }
+
+
 
     public function create()
     {
@@ -72,9 +75,13 @@ class VentaController extends Controller
         $request->merge(['forma_pago' =>  $tipo_pago]);
         $request->merge(['numero_mesa' =>  $id_mesa]);
 
-         $mesa = Mesa::findOrFail($id_mesa);
-         $mesa->estado = true;
+        if ($id_mesa != null) 
+        {
+           $mesa = Mesa::find($id_mesa);
+          $mesa->estado = true;
           $mesa->save();
+        }
+        
         //return json_encode(['success' => false, "msg" => 'mensaje'])
 
         //seteo el empleado que inició sesión

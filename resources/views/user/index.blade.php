@@ -26,7 +26,7 @@
         @foreach ($users as $user)
 		    <tr>
 		      <td>
-            <a href="{{ url('/user/'. $user->id. '/edit') }}">{{ $user->nombre }}</a>
+            <a title="Presiona para editar" href="{{ url('/user/'. $user->id. '/edit') }}">{{ $user->nombre }}</a>
           </td>
 		      <td> {{ $user->cedula }}</td>
           <td> {{ $user->telefono }}</td>

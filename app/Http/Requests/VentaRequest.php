@@ -30,7 +30,6 @@ class VentaRequest extends FormRequest
             'total' => 'required',
             'forma_pago'=> 'required',
             'llevar'=> 'required',
-            'numero_mesa'=> 'required',
             'id_cliente'=> 'required',
             'ci_user'=> 'required',
         ];

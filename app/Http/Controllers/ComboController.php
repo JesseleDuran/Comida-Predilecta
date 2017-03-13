@@ -19,12 +19,16 @@ class ComboController extends Controller
 
     public function index()
     {
+      $arreglo = array();//max de comidas 
     	$combos = Comida::where('tipo', '=', 'combo')->get();
 
-      $result = $this->cantidad_posibleCombos();
-      dd($result);
+      for ($i=0; $i < sizeof($combos) ; $i++) 
+      {
+          $cantPosiblecombos = $this->cantidad_posibleCombos($combos[$i]->id); 
+          array_push($arreglo, $cantPosiblecombos);    
+      }
 
-    	return view('combo.index', compact('combos'));
+    	return view('combo.index', compact('combos', 'arreglo'));
     }
 
   	public function show($id)
@@ -70,7 +74,7 @@ class ComboController extends Controller
     public function edit($id)
     {
       $combo = Comida::findOrFail($id);
-      $comidas = \App\Comida::all(); 
+      $comidas = Comida::where('tipo', '=', 'comida')->get();
 
 
       return view('combo.edit', compact('combo', 'comidas'));
@@ -79,10 +83,19 @@ class ComboController extends Controller
     public function update($id, ComidaRequest $request)
     {
       $combo = Comida::findOrFail($id);
-
       $combo->update($request->all());
 
-      $comidas = $combo->comidaCombo; //obtengo los ingredientes de esa combo
+      $comidas = $request->input('comida_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
+      $cantidades = $request->input('cantidad');
+
+
+      foreach($comidas as $key => $in_id)
+      {
+        $comida_comida = new Comida_Comida(['id_comida' => $in_id,
+                                                 'id_comida1' => $combo->id, 
+                                                 'cantidad'=> $cantidades[$key]]);
+        $comida_comida->save();
+      }
 
       return redirect('combo');
     }
@@ -115,24 +128,13 @@ class ComboController extends Controller
       return $cantPosibleComidas;
     }
 
-    protected function cantidad_posibleCombos()
+    protected function cantidad_posibleCombos($id)
     {
-      $min = array();
-      $arreglo = array();
-      $comidasNecesaria = collect();
-
+      $arreglo = array();//max de comidas 
+      $necesaria = array();
       $comidas = Comida::where('tipo', '=', 'comida')->get();
-      
-      $combos = Comida::where('tipo', '=', 'combo')->get();
-
-      foreach ($combos as $combo)
-      {
-          foreach($combo->comidaCombo as $comida)
-          {
-            $comidasNecesaria = $comida->cantidad;
-          }        
-      }
-      
+      $combo = Comida::findOrFail($id);
+      $arrayResult = array();
 
       for ($i=0; $i < sizeof($comidas) ; $i++) 
       {
@@ -140,12 +142,30 @@ class ComboController extends Controller
           array_push($arreglo, $cantPosibleComidas);    
       }
 
-      foreach ($combos as $key => $combo) 
-      {
-          $min = collect($arreglo[$key]->cant_posible/$comidasNecesaria[$key])->min();
-      }
+     foreach ($combo->comidaCombo as $key => $comida)
+     {
+        if ($comida->comida->nombre == $arreglo[$key]->nombre) 
+        { 
+            $cantidades = ($arreglo[$key]->cant_posible/$comida->cantidad);
+            array_push($arrayResult, $cantidades);
+        }
+     } 
+
+      $min = min($arrayResult);
+      
      
       return $min;
+    }
+
+    public function deleteComboComida($id_combo, $id_comida)
+    {
+        $relacion = Comida_Comida::where([
+                    ['id_comida', '=', $id_comida],
+                    ['id_comida1', '=', $id_combo],
+                    ])->first();
+        $relacion->delete();
+
+        return Redirect::back();
     }
 
     

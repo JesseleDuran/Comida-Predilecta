@@ -13,7 +13,7 @@
                         
 
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
                                 <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Cedula</label>
+                            <label for="name" class="col-md-4 control-label">Cédula</label>
 
                             <div class="col-md-6">
                                 <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required>
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
-                            <label for="telefono" class="col-md-4 control-label">telefono</label>
+                            <label for="telefono" class="col-md-4 control-label">Teléfono</label>
 
                             <div class="col-md-6">
                                 <input id="telefono" type="telefono" class="form-control" name="telefono" value="{{ old('telefono') }}" required>
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
-                            <label for="direccion" class="col-md-4 control-label">direccion</label>
+                            <label for="direccion" class="col-md-4 control-label">Dirección</label>
 
                             <div class="col-md-6">
                                 <input id="direccion" type="direccion" class="form-control" name="direccion" value="{{ old('direccion') }}" required>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">password</label>
+                            <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm password</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Confirmar contraseña</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>

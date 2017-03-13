@@ -17,7 +17,7 @@
         @foreach ($ivas as $iva)
 		    <tr>
 		      <td>
-            <a href="{{ url('/ivas/'. $iva->id. '/edit') }}">{{ $iva->tipo_pago }}</a>
+            <a title="Presiona para editar" href="{{ url('/ivas/'. $iva->id. '/edit') }}">{{ $iva->tipo_pago }}</a>
           </td>
           <td> {{ $iva->iva }}</td>
 		    </tr>

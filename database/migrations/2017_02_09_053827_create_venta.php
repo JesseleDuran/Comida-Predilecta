@@ -20,7 +20,7 @@ class CreateVenta extends Migration
             $table->float('total', 8, 2)->unsigned();
             $table->string('forma_pago');
             $table->boolean('llevar');
-            $table->integer('numero_mesa');
+            $table->integer('numero_mesa')->nullable();
             $table->integer('id_cliente');
             $table->string('ci_user');
 

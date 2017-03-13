@@ -19,17 +19,13 @@
 				</thead>
 				<tbody>
 					@foreach ($horasVentasPresenciales as $venta)
+					@foreach ($horasVentasLlevar as $ventaLlevar)
 					<tr>
 						<th>Hora: {{$venta->hora}}:00 del día</th>
 						<td>{{$venta->suma_cantidad}}</td>
+						<td>{{$ventaLlevar->suma_cantidad}}</td>
 					</tr>
 					@endforeach
-
-					@foreach ($horasVentasLlevar as $venta)
-					<tr>
-						<th>Hora: {{$venta->hora}}:00 del día</th>
-						<td>{{$venta->suma_cantidad}}</td>
-					</tr>
 					@endforeach
 				</tbody>
 			</table>

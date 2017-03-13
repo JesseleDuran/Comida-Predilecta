@@ -87,7 +87,7 @@
 					         <li>({{ $comida->cantidad }}) {{ $comida->comida->nombre }} </li>
 					     @endforeach
             		<li class="divider"></li>
-            		<p>Cant. Disponible: {{$arreglo2[$key]}}</p>
+            		<p>Cant. Disponible: 009</p>
         		</div>
       		</div>
       	</div>
@@ -104,7 +104,7 @@
     
     <div class="container right">      
       
-        <h2 class="center teal-text">Comidas</h2>
+        <h2 class="center teal-text">Comida</h2>
         <li class="divider"></li>
       
       <div class="row">
@@ -125,7 +125,7 @@
 					   <li>{{ $ingrediente->ingrediente->nombre }} ({{ $ingrediente->cantidad }})</li>
 				    @endforeach
                     <li class="divider"></li>
-                    <p>Cant. Disponible: {{ $arreglo[$key]->cant_posible }}</p>
+                    <p>Cant. Disponible: 009</p>
                 
                 </div>
             </div>
@@ -139,7 +139,6 @@
 
 <script type="text/javascript">
   var total;
-  var mesa = {!! $mesa->id !!};
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   	$(document).ready(function()
   	{
@@ -239,7 +238,7 @@ function vender()
       $.ajax({
       url: '/guardarVenta',
       type: 'POST',
-      data: {_token: CSRF_TOKEN, nombre:nombre, cedula:cedula, tipo_pago:tipoPago, comidas:array, mesa:mesa},
+      data: {_token: CSRF_TOKEN, nombre:nombre, cedula:cedula, tipo_pago:tipoPago, comidas:array},
       dataType: 'JSON',
       success: function (data)
       {

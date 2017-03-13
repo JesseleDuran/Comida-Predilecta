@@ -74,20 +74,35 @@ class ComidaController extends Controller
 
     public function update($id, ComidaRequest $request)
     {
-      $comida = Comida::findOrFail($id);
+      $updatedComida = Comida::findOrFail($id);
+      $updatedComida->update($request->all());
 
-      $comida->update($request->all());
+      $ingredientes = $request->input('ingrediente_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
+      $cantidades = $request->input('cantidad');
 
-      $ingredientes = $comida->comidaIngredientes; //obtengo los ingredientes de esa comida
+      foreach($ingredientes as $key => $in_id)
+      {
+        $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $in_id,
+                                                      'id_comida' => $updatedComida->id, 
+                                                      'cantidad'=> $cantidades[$key]]);
+        $ingrediente_comida->save();
+      }
 
+      //$ingredientes = $comida->comidaIngredientes;
       return redirect('comida');
     }
 
     public function destroy($id)
-    {
-      Comida::find($id)->delete();
-
-      return Redirect::back()->with('message','Operation Successful !');
+    { 
+        try 
+        {
+          Comida::find($id)->delete();
+          return Redirect::back()->with('message','Operation Successful !');
+        }
+      catch (\Illuminate\Database\QueryException $qe) 
+      {
+          return redirect()->back()->withErrors(['No puede eliminar una comida que está siendo utilizada por un Combo.']);
+      }
     }
 
     public function deleteComidaIngrediente($id_comida, $id_ingrediente)
@@ -101,14 +116,6 @@ class ComidaController extends Controller
         return Redirect::back();
     }
 
-    public function addComidaIngrediente($id_comida, $id_ingrediente, $cantidad)
-    {
-        $ingrediente_comida = new Comida_Ingrediente(['id_ingrediente' => $id_ingrediente,
-                                                      'id_comida' => $id_comida, 
-                                                      'cantidad'=> $cantidad]);
-        $ingrediente_comida->save();
-        return redirect('comida');
-    }
 
     protected function cantidad_posibleComidas($id)
     {

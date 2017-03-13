@@ -69,7 +69,8 @@
             </li>
           </ul>
         </li>
-        <li class="bold"><a href="Respaldo.html" class="waves-effect waves-white">Generar Respaldo</a></li>
+        <li class="bold"><a href="{{ url('/empleado/mesas') }}" class="waves-effect waves-white">Trabajar como vendedor</a></li>
+
         
         </ul>
  <nav>
@@ -87,7 +88,7 @@
 		<li><a href="{{ url('/comida/create') }}" class="orange-text">Comida, Bebida</a></li>
 		<li><a href="{{ url('/combo/create') }}" class="orange-text">Combo</a></li>		
 		<li class="divider"></li>
-		<li><a href="#modal4" class="orange-text">Empleado</a></li>
+		<li><a href="{{ url('/register') }}" class="orange-text">Empleado</a></li>
 		<li><a href="#modal5" class="orange-text">Mesa</a></li>
 	  </ul>
   </nav>
@@ -107,43 +108,8 @@
 	</div>
 </div>
 
-<!-- Empleado -->
-	<div id="modal4" class="modal modal-fixed-footer">
-		<div class="modal-content">
-		  <h4>Agregar Empleado</h4>
-		    <div class="row">
-				<form class="col s12">
-				  <div class="row">
-						<div class="input-field col s6">
-						  <input placeholder="C.I" id="cedula" type="text" class="validate">
-						  <label for="cedula">Cedula de Identidad</label>
-						</div>
-						<div class="input-field col s6">
-						  <input id="Nombre" type="text" class="validate">
-						  <label for="Nombre">Nombre</label>
-						</div>
-					  </div>				  
-					  <div class="row">
-						<div class="input-field col s8">
-						  <input id="Clave" type="password" class="validate">
-						  <label for="Clave">Clave</label>
-						</div>
-					  </div>
-						<div class="input-field col s8">
-						  <input placeholder="Ingrese Numero de Teléfono" id="tlf" type="text" class="validate">
-						  <label for="tlf">Telefono</label>
-						</div>
-						<div class="input-field col s12">
-						  <input placeholder="Dirección del Empleado" id="adress" type="text" class="validate">
-						  <label for="adress">Direcci&oacuten</label>
-						</div>
-				</form>
-			</div>
-		</div>	
-			<div class="modal-footer">			
-			  <a href="#!" class=" modal-action modal-close waves-effect waves-orange btn-flat">Agregrar</a>
-			  <a href="#!" class=" modal-action modal-close waves-effect waves-orange btn-flat">Cancelar</a>			  
-			</div>
+
+			
 	</div>
 <!-- MESA -->
 	<div id="modal5" class="modal">

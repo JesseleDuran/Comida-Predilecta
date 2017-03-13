@@ -25,20 +25,27 @@
             <th>Llevar</th>
             <th>CI del Empleado</th>
             <th>ID del Comprador</th>
+            <th>Compra</th>
 			      <th>Acción</th>
         </thead>
         <tbody>
         @foreach ($ventas as $venta)
 		    <tr>
 		      <td>
-            <a href="{{ url('/venta/'. $venta->id. '/edit') }}">{{ $venta->id }}</a>
+            <a title="Presiona para editar" href="{{ url('/venta/'. $venta->id. '/edit') }}">{{ $venta->id }}</a>
           </td>
 		      <td> {{ $venta->created_at }}</td>
           <td> {{ $venta->subtotal }}</td>
           <td> {{ $venta->forma_pago }}</td>
           <td> {{ $venta->iva }}</td>
           <td> {{ $venta->total }}</td>
-          <td> {{ $venta->numero_mesa }}</td>
+          @if($venta->numero_mesa == null)
+            <td>Sin mesa</td>
+          @endif
+          @if($venta->numero_mesa != null)
+            <td> {{ $venta->numero_mesa }}</td>
+          @endif  
+          
           @if($venta->llevar == false)
             <td>No</td>
           @elseif ($venta->llevar == true)
@@ -47,7 +54,14 @@
           <td> {{ $venta->ci_user }}</td>
           <td> {{ $venta->id_cliente }}</td>
           <td>
-            <a href="{{route('venta.show',$venta->id)}}"> Ver venta</a>
+          <ul>
+            @foreach ($venta->comidaVenta as $comida)
+
+             <li> {{ $comida->cantidad }} {{ $comida->comida->nombre }} </li>
+            @endforeach
+           </ul>
+           </td>
+          <td>
             {{ Form::open(['method' => 'DELETE','route' => ['venta.destroy', $venta->id],'style'=>'display:inline'])}}
             {{ Form::submit('Eliminar')}}
             {{ Form::close()}}

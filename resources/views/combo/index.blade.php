@@ -26,12 +26,12 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($combos as $combo)
+        @foreach ($combos as $key => $combo)
 		<tr>
 		  <td>
-            <a href="{{ url('/combo/'. $combo->id. '/edit') }}">{{ $combo->nombre }}
+            <a title="Presiona para editar" href="{{ url('/combo/'. $combo->id. '/edit') }}">{{ $combo->nombre }}
           </td>
-		  <td> query más largo </td>
+		  <td> {{$arreglo[$key]}} </td>
           <td> {{ $combo->precio }}</td>
          <td> {{ $combo->descripcion }}</td> 
          <td>

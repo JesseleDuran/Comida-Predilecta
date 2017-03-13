@@ -36,7 +36,7 @@ class PdfController extends Controller
 
         for ($i=0; $i < sizeof($comidas) ; $i++) 
         {
-            $cantPosibleComidas = $this->cantidad_posible($comidas[$i]->id); 
+            $cantPosibleComidas = $this->cantidad_posibleComidas($comidas[$i]->id); 
             array_push($arreglo, $cantPosibleComidas);    
         }
 
@@ -54,7 +54,15 @@ class PdfController extends Controller
     public function pdfCombo() 
     {
         $combos = Comida::where('tipo', '=', 'combo')->get();
-        $view =  \View::make('pdf.comboPDF', compact('combos'))->render();
+         $arreglo = array();
+        
+        for ($i=0; $i < sizeof($combos) ; $i++) 
+        {
+          $cantPosiblecombos = $this->cantidad_posibleCombos($combos[$i]->id); 
+          array_push($arreglo, $cantPosiblecombos);    
+        }
+        
+        $view =  \View::make('pdf.comboPDF', compact('combos', 'arreglo'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('pdfCombo');
@@ -87,7 +95,7 @@ class PdfController extends Controller
         return $pdf->stream('pdfCliente');
     }
 
-    protected function cantidad_posible($id)
+    protected function cantidad_posibleComidas($id)
     {
       $cantPosibleComidas = DB::table('comida_ingrediente')
                           ->select(DB::raw('min((ingrediente.cantidad / comida_ingrediente.cantidad)) AS cant_posible, comida.nombre'))
@@ -97,5 +105,34 @@ class PdfController extends Controller
                           ->first();
 
       return $cantPosibleComidas;
+    }
+
+    protected function cantidad_posibleCombos($id)
+    {
+      $arreglo = array();//max de comidas 
+      $necesaria = array();
+      $comidas = Comida::where('tipo', '=', 'comida')->get();
+      $combo = Comida::findOrFail($id);
+      $arrayResult = array();
+
+      for ($i=0; $i < sizeof($comidas) ; $i++) 
+      {
+          $cantPosibleComidas = $this->cantidad_posibleComidas($comidas[$i]->id); 
+          array_push($arreglo, $cantPosibleComidas);    
+      }
+
+     foreach ($combo->comidaCombo as $key => $comida)
+     {
+        if ($comida->comida->nombre == $arreglo[$key]->nombre) 
+        { 
+            $cantidades = ($arreglo[$key]->cant_posible/$comida->cantidad);
+            array_push($arrayResult, $cantidades);
+        }
+     } 
+
+      $min = min($arrayResult);
+      
+     
+      return $min;
     }
 }
