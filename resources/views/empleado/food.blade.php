@@ -44,16 +44,16 @@
         </div>
       </div>
        <div class="input-field col s12">
-           <select>
+           <select id="tipo_pago">
  
-      <option value="1">Débito</option>
-      <option value="2">Crédito</option>
-      <option value="3">Efectivo</option>
+      <option value="debito">Débito</option>
+      <option value="credito">Crédito</option>
+      <option value="efectivo">Efectivo</option>
     </select>
   </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Terminar Venta</a>
+      <a href="#!" onclick="vender();" class=" modal-action modal-close waves-effect waves-teal btn-flat">Terminar Venta</a>
       <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar Orden</a>
     </div>
   </div>
@@ -64,7 +64,7 @@
       
       <!--  Combos -->
       
-      <div class="container grey lighten-4 right">
+      <div class="container right">
       
           <h2 class="center teal-text">Combos</h2>
       <li class="divider"></li>
@@ -74,20 +74,20 @@
       
       <div class="row">
       
-       @foreach ($combos as $combo)   
+       @foreach ($combos as $key => $combo)   
       	<div class="left col s12 m3">
       		<div class="card">
         		<div class="card-content">
-                	<a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" onclick="return facturar({{ $combo->id }},{{ $combo->precio }},1);">
+                	<a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" onclick="return facturar({{ $combo->id }}, '{{ $combo->nombre }}', {{ $combo->precio }},1)">
                     	<i class="material-icons">add</i>
                		 </a>
-            		<h5 class="teal-text">{{ $combo->nombre }}</h5>
+            		<h5 class="teal-text">{{ $combos[$key]->nombre }}</h5>
             		<li class="divider"></li>
-            		<p>{{ $combo->descripcion }}. Precio: Bs.{{ $combo->precio }}</p>
+            		<p>{{ $combos[$key]->descripcion }}. Precio: Bs.{{ $combos[$key]->precio }}</p>
             		<p>Comidas:</p>	
             		@foreach ($combo->comidaCombo as $comida)
-					<li>({{ $comida->cantidad }}) {{ $comida->comida->nombre }} </li>
-					@endforeach
+					         <li>({{ $comida->cantidad }}) {{ $comida->comida->nombre }} </li>
+					     @endforeach
             		<li class="divider"></li>
             		<p>Cant. Disponible: 009</p>
         		</div>
@@ -104,23 +104,23 @@
     <!--  Comidas -->
     
     
-    <div class="container grey lighten-4 right">      
+    <div class="container right">      
       
         <h2 class="center teal-text">Comida</h2>
         <li class="divider"></li>
       
       <div class="row">
-           @foreach ($comidas as $comida)
+           @foreach ($comidas as $key => $comida)
             <div class="left col s12 m3">
             <div class="card">
                 <div class="card-content">
-                    <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" onclick="return facturar({{ $comida->id }},{{ $comida->precio }},1);">
+                    <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" onclick="return facturar({{ $comida->id }}, '{{ $comida->nombre }}', {{ $comida->precio }},1)">
                     <i class="material-icons">add</i>
                     </a>
         
                     <h5 class="teal-text">{{ $comida->nombre }}</h5>
                     <li class="divider"></li>
-                    <p>{{ $combo->descripcion }}. Precio: Bs.{{ $combo->precio }}</p>
+                    <p>{{ $comida->descripcion }}. Precio: Bs.{{ $comida->precio }}</p>
                     <p>Ingredientes:</p>
                      @foreach ($comida->comidaIngredientes as $ingrediente)
 
@@ -134,164 +134,157 @@
         </div>
 
          @endforeach
-          
-          
-      
-    
-    <!--  Extras -->
-    
-    
-    <div class="container grey lighten-4 right">      
-      
-        <h2 class="center teal-text">Extras</h2>
-        <li class="divider"></li>
-      
-      <div class="row">
-           
-            <div class="float left col s12 m4">
-      <div class="card">
-        
-          
-       
-        <div class="card-content">
-            
-          <h5 class="lime-text">Extras</h5>
-            
-            <div class="collection" onclick="return facturar(A,600,1);">
-                  
-                   <a  class="collection-item left">Ex#1<a class="btn-floating btn-small  waves-effect waves-light teal right" onclick="return facturar(11,900,1);"><i class="material-icons">add</i></a>
-                   <a  class="collection-item left">Ex#2<a class="btn-floating btn-small  waves-effect waves-light teal right" onclick="return facturar(12,1000,1);"><i class="material-icons">add</i></a>
-                   <a  class="collection-item left">Ex#3<a class="btn-floating btn-small  waves-effect waves-light teal right" onclick="return facturar(13,2000,1);"><i class="material-icons">add</i></a>
-                   
-              </div>
-          <p>Cant. Disponible: 009</p>
-        </div>
-      </div>
-    </div>
-          
-      </div>
-    </div>
-
-
 @stop
 
 
 @section('scripts')
 
 <script type="text/javascript">
-
+  var total;
+  var mesa = {!! $mesa->id !!};
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   	$(document).ready(function()
   	{
     	$('.modal').modal();
     	 $('select').material_select();
+       sessionStorage.clear();
     });	
 
-    	function nuevoitem()
-    	{
-			var clave=document.getElementById('clave').value;
-			var valor=document.getElementById('precio').value;
-			var cantidad=document.getElementById('cantidad').value;
-			sessionStorage.setItem(clave,valor);
+    	function nuevoitem(desc)
+      {
+        var clave=document.getElementById('clave').value;
+        var valor=document.getElementById('precio').value;
+        var cantidad=document.getElementById('cantidad').value;
+        sessionStorage.setItem(clave,valor);
 
-    		if(sessionStorage.length>0)
-    		{
-        		for(var u=0; u<=sessionStorage.length;u++)
-        		{
-            		var preclave=sessionStorage.key(u);
-            		if(clave===preclave)
-            		{
-                		var suma=sessionStorage.getItem('sub'+clave);
-                		suma+=1;
-                		sessionStorage.setItem('sub'+clave,suma);
-                	}
-            	}
-    		}else
-    		{
-    			sessionStorage.setItem('sub'+clave,cantidad);
-    		}
+            if(sessionStorage.length>0)
+            {
+                for(var u=0; u<=sessionStorage.length;u++){
+                    var preclave=sessionStorage.key(u);
+                    if(clave===preclave){
+                        var suma=sessionStorage.getItem('sub'+clave);
+                        suma+=1;
+                        sessionStorage.setItem('sub'+clave,suma);
+                        sessionStorage.setItem('sib'+clave,desc);
+                        }
+                    }
+            }
+            else{
+            sessionStorage.setItem('sub'+clave,cantidad);
+            sessionStorage.setItem('sib'+clave,desc);
+            }
 
-			mostrar();
-		} 
+        mostrar();
+     } 
 
 
-		function mostrar()
-		{
-
-    		var cajadatos=document.getElementById('cajadatos');
-    		var totalfactura=document.getElementById('totalfactura');
-    		var subtotalcalculo=0;
-    		cajadatos.innerHTML='';
+function mostrar()
+{
+    var cajadatos=document.getElementById('cajadatos');
+    var totalfactura=document.getElementById('totalfactura');
+    var subtotalcalculo=0;
+    cajadatos.innerHTML='';
     
-    		for(var f=0;f<sessionStorage.length;f++)
-   			{
-        		var clave=sessionStorage.key(f);
-        		var valor=sessionStorage.getItem(clave);
-        		var cantidad=sessionStorage.getItem('sub'+clave);
-        		var cifra = cantidad.length;
-        		if(cantidad!==null)
-        		{
-            		if((clave==11)||(clave==12)||(clave==13))
-            		{
-           				cajadatos.innerHTML+='<p><input class="chip" type="button" value="Extra   -  Bs.'+valor+'    x ('+cifra+')" onclick="return eliminar('+clave+');"></p>';
-            		}else
-            		{
-            			if((clave==8)||(clave==10)||(clave==9))
-            			{
+    for(var f=0;f<sessionStorage.length;f++){
+        var clave=sessionStorage.key(f);
+        var valor=sessionStorage.getItem(clave);
+        var cantidad=sessionStorage.getItem('sub'+clave);
+        var cifra = cantidad.length;
+        var nombre=sessionStorage.getItem('sib'+clave);
+      
+            cajadatos.innerHTML+='<p><input class="chip" type="button" value="'+nombre+' - Bs.'+valor+'    x ('+cifra+')" onclick="return eliminar('+clave+');"></p>';
             
-            				cajadatos.innerHTML+='<p><input class="chip" type="button" value="Bebida   -  Bs.'+valor+'    x ('+cifra+')" onclick="return eliminar('+clave+');"></p>';
-            			}else
-            			{
-            				cajadatos.innerHTML+='<p><input class="chip" type="button" value="'+clave+'   -  Bs.'+valor+'    x ('+cifra+')" onclick="return eliminar('+clave+');"></p>';
-            			}
-            		}
-            		totalfactura.innerHTML='<p>Subtotal                  Bs.'+ (subtotalcalculo=subtotalcalculo+(valor*cifra)) +'</p>';
-        		}
-        		totalfactura.innerHTML+='<p>Total (Incluye 10% IVA)  Bs.'+ (subtotalcalculo+(subtotalcalculo*0.1)) +'</p>';
-    		}
-
-    		if(sessionStorage.length===0)
-    		{
             
-    			totalfactura.innerHTML='<p>Subtotal                  Bs. 0 </p>';
-    			totalfactura.innerHTML+='<p>Total (Incluye 10% IVA)  Bs. 0 </p>';
-			}    
-        }
-			
-		function facturar(meal, price, qnt) 
-		{
-			var Combo=meal;
-			var Bs=price;
-			var x=qnt;
-			document.getElementById('clave').value=Combo;
-			document.getElementById('precio').value=Bs;
-			document.getElementById('cantidad').value=x;
-			nuevoitem();
-		}
-
-		function eliminar(clave)
-		{
+            totalfactura.innerHTML='<p>Subtotal                  Bs.'+ (subtotalcalculo=subtotalcalculo+(valor*cifra)) +'</p>';
         
-    		var actual=sessionStorage.getItem('sub'+clave);
-
-    		if(actual.length>1)
-    		{ 
-        		sessionStorage.setItem('sub'+clave,0);
-        		var resta=sessionStorage.getItem('sub'+clave);
-
-        		for(var w=0;w<(actual.length-2);w++)
-        		{
-            		resta+=1;
-        		}
+    }
+    if(sessionStorage.length===0){
+            
+    totalfactura.innerHTML='<p>Subtotal                  Bs. 0 </p>';
     
-    			sessionStorage.setItem('sub'+clave,resta);    
-    		}else
-    		{
-        		sessionStorage.removeItem(clave);
-        		sessionStorage.removeItem('sub'+clave);
-    		}
+    }
+} 
+
+
+function facturar(meal, name,price, qnt) 
+{
+  var Combo=meal;
+  var Bs=price;
+  var x=qnt;
+  document.getElementById('clave').value=Combo;
+  document.getElementById('precio').value=Bs;
+  document.getElementById('cantidad').value=x;
+  nuevoitem(name);
+}
     
-    		mostrar();
-		}
+
+
+function vender()
+{
+    var array = [];
+    
+    for(var f=0;f<sessionStorage.length;f++)
+    {
+        var clave=sessionStorage.key(f);
+        var valor=sessionStorage.getItem(clave);
+        var cantidad=sessionStorage.getItem('sub'+clave);
+        //var cifra = cantidad.length;
+        var nombre=sessionStorage.getItem('sib'+clave);
+        if(cantidad  != null)    
+          array.push({id:clave, cantidad:cantidad.length}); 
+            
+    }
+    var nombre = $('#nombre').val();
+    var cedula = $('#cedula').val();
+    var tipoPago = $('#tipo_pago').val();
+
+      $.ajax({
+      url: '/guardarVenta',
+      type: 'POST',
+      data: {_token: CSRF_TOKEN, nombre:nombre, cedula:cedula, tipo_pago:tipoPago, comidas:array, mesa:mesa},
+      dataType: 'JSON',
+      success: function (data)
+      {
+        console.log(data);
+        if(data.msg)
+          Materialize.toast(data.msg, 3000, 'red rounded');
+        else
+        {
+          sessionStorage.clear();
+          console.log(data);
+          window.location.href = "/venta/"+data.id_venta;
+        }
+      }});
+
+}
+
+function eliminar(clave){
+        
+    var actual=sessionStorage.getItem('sub'+clave);
+
+    if(actual.length>1){
+
+    
+        sessionStorage.setItem('sub'+clave,0);
+        var resta=sessionStorage.getItem('sub'+clave);
+
+        for(var w=0;w<(actual.length-2);w++){
+            resta+=1;
+        }
+    
+    sessionStorage.setItem('sub'+clave,resta);
+    
+    }else{
+        
+        
+        sessionStorage.removeItem(clave);
+        sessionStorage.removeItem('sub'+clave);
+        sessionStorage.removeItem('sib'+clave);
+    
+    }
+    
+    mostrar();
+}
   
 	
 </script>

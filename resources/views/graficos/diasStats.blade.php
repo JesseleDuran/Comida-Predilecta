@@ -45,7 +45,7 @@ $(document).ready(function ()
 					table: 'datatable'
 				},
 				chart: {
-					type: 'column'
+					type: 'pie'
 				},
 				title: {
 					text: 'Días con más ventas'
@@ -59,6 +59,8 @@ $(document).ready(function ()
 				
 			});
 		});
+	$('.modal').modal();
+    $('#myTable').DataTable();
 </script>
 
 @endsection

@@ -39,9 +39,9 @@
           <td> {{ $venta->iva }}</td>
           <td> {{ $venta->total }}</td>
           <td> {{ $venta->numero_mesa }}</td>
-          @if($ventas->estado == false)
+          @if($venta->llevar == false)
             <td>No</td>
-          @elseif ($mesas->estado == true)
+          @elseif ($venta->llevar == true)
             <td>Sí</td>
           @endif  
           <td> {{ $venta->ci_user }}</td>

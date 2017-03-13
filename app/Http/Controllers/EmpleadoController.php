@@ -43,7 +43,7 @@ class EmpleadoController extends Controller
   		$mesa = Mesa::findOrFail($id);
         $empleado = User::where('cedula' ,Auth::id())->first();
         $combos = Comida::where('tipo', '=', 'combo')->get();
-        $comidas = $comidas = Comida::where('tipo', '=', 'comida')->get();
+        $comidas = Comida::where('tipo', '=', 'comida')->get();
 
   		return view('empleado.food', compact('empleado', 'mesa', 'comidas', 'combos'));
   	}

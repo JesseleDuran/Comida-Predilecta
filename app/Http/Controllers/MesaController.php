@@ -59,8 +59,26 @@ class MesaController extends Controller
 
     public function destroy($id)
     {
-      Mesa::find($id)->delete();
-
-      return Redirect::back()->with('message','Operation Successful !');
+      try 
+      {
+        Mesa::find($id)->delete();
+        return Redirect::back()->with('message','Operation Successful !');
+      } 
+      catch (\Illuminate\Database\QueryException $qe) 
+      {
+          return redirect()->back()->withErrors(['No puede eliminar una Mesa Ocupada']);
+      }
     }
+
+    public function cambiarEstado(Request $request)
+    {
+      $mesa = Mesa::findOrFail($request->input('mesa'));
+      $mesa->estado = false;
+      $mesa->save();
+
+      return json_encode(['success' => true]);
+
+    }
+
+    
 }

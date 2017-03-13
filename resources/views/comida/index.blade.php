@@ -28,12 +28,12 @@
           </tr>
         </thead>
         <tbody>
-        @foreach ($comidas as $comida)
+        @foreach($comidas as $key => $comida)  
 		<tr>
 		      <td>
             <a href="{{ url('/comida/'. $comida->id. '/edit') }}">{{ $comida->nombre }}
           </td>
-		      <td> query </td>
+		      <td> {{ $arreglo[$key]->cant_posible }} </td>
           <td> {{ $comida->precio }}</td>
           <td> {{ $comida->descripcion }}</td> 
           <td>
@@ -59,13 +59,18 @@
 
   @stop
 
-  @section('scripts')
+@section('scripts')
 
 <script>
 
   $(document).ready(function(){
     $('.modal').modal();
-    $('#myTable').DataTable();
+    $('#myTable').DataTable(
+      {
+
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }});
   });
 </script>
 

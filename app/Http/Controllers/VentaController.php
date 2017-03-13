@@ -4,25 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Venta;
+use App\Ivas;
+use App\Comida;
+use App\Cliente;
+use App\User;
+use App\Comida_Venta;
+use App\Mesa;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class VentaController extends Controller
 {
 
-
-    //user_id => Auth::user()->id;
-    //request['user_id'] = Auth::id();
-
-	//$ingrediente = new Ingrediente(request->all():
-    //Auth::user()->ingredientes()->save($ingrediente));
-
-
-
-   /* $request = $request->all();
-    $request['user_id'] = Auth::id();*/
-
-
-
-    
 
     public function index()
     {
@@ -35,8 +29,9 @@ class VentaController extends Controller
     {
 
       $venta = Venta::findOrFail($id);
+      $empleado = User::where('cedula' ,Auth::id())->first();
 
-      return view('venta.show', compact('venta'));
+      return view('venta.show', compact('venta', 'empleado'));
     }
 
     public function create()
@@ -50,57 +45,7 @@ class VentaController extends Controller
     }
 
     /*la validación es disparada antes de que se cree el ingrediente*/
-    public function store(VentaRequest $request)
-    {
-
-      //seteo el empleado que inició sesión
-      $request->merge(['ci_user' => Auth::id()]);
-
-      //obtengo la fila del tipo de pago, para obtener su IVA
-      $ivaCategorizado = Ivas::where('tipo_pago', '=', $request->forma_pago)->first();
-
-      //seteo el Iva correspondiente a la forma de pago
-      $request->merge(['iva' => $ivaCategorizado->iva]);
-
-      //obtengo la cédula del cliente
-      $CI_cliente = $request->input('ci_cliente');
-
-      //Chequeo si existe, almacenando en una variable
-      $cliente = Cliente::where('ci', '=', $CI_cliente)->first();
-
-      //si es nulo, crearlo
-      if ($cliente == null) 
-      {
-        $comprador = new Cliente(['ci' => $CI_cliente, 'nombre' => $request->nombreCliente]);
-        $comprador->save();
-        $request->merge(['id_cliente' => $comprador->id]);
-      }
-      else
-      {
-        $request->merge(['id_cliente' => $cliente->id]);
-      }
-
-      $datos_venta = $request->only('subtotal', 'total', 'ci_user', 'iva', 
-                                    'id_cliente', 'numero_mesa', 'llevar', 'forma_pago');
-
-      $ventaNueva = Venta::create($datos_venta);      
-      $ventaNueva->save();
-
-      $comidas = $request->input('comida_id'); // ESTO VA A SER UN ARRAY CON TODOS LOS IDS! 
-      $cantidades = $request->input('cantidad');
-
-      foreach($comidas as $key => $food_id)
-      {
-        $comida_venta = new Comida_Venta(['id_comida' => $food_id,
-                                          'id_venta' => $nuevaVenta->id, 
-                                          'cantidad'=> $cantidades[$key]]);
-        $ingrediente_comida->save();
-      }
-
-      flash()->success('La venta ha sido creado');
-
-      return ('venta');
-    }
+   
 
     public function edit($id)
     {
@@ -116,4 +61,89 @@ class VentaController extends Controller
       return redirect('venta');
     }
 
+  public function guardarVenta(Request $request)
+  {
+        $comidas = $request->input('comidas'); // array con id y cantidad
+        $ci_cliente = $request->input('cedula');
+        $tipo_pago = $request->input('tipo_pago');
+        $nombre = $request->input('nombre');
+        $id_mesa = $request->input('mesa');
+
+        $request->merge(['forma_pago' =>  $tipo_pago]);
+        $request->merge(['numero_mesa' =>  $id_mesa]);
+
+         $mesa = Mesa::findOrFail($id_mesa);
+         $mesa->estado = true;
+          $mesa->save();
+        //return json_encode(['success' => false, "msg" => 'mensaje'])
+
+        //seteo el empleado que inició sesión
+        $request->merge(['ci_user' => Auth::id()]);
+        //obtengo la fila del tipo de pago, para obtener su IVA
+        $ivaCategorizado = Ivas::where('tipo_pago', '=', $tipo_pago)->first();
+        //seteo el Iva correspondiente a la forma de pago
+        $request->merge(['iva' => $ivaCategorizado->iva]);
+        //Chequeo si existe, almacenando en una variable
+        $cliente = Cliente::where('cedula', '=', $ci_cliente)->first();
+
+        //si es nulo, crearlo
+        if ($cliente == null) 
+        {
+          $comprador = new Cliente(['cedula' => $ci_cliente, 'nombre' => $nombre]);
+          $comprador->save();
+          $request->merge(['id_cliente' => $comprador->id]);
+        }
+        else
+        {
+          $request->merge(['id_cliente' => $cliente->id]);
+        }
+
+        if($id_mesa != null) 
+        {
+          $request->merge(['llevar' => false]);
+        }
+        if($id_mesa == null) 
+        {
+            $request->merge(['llevar' => true]);
+        }
+
+        $subtotal = 0;
+
+        foreach($comidas as $food)
+        {
+            $comida = Comida::where('id', '=', $food['id'])->first();
+            $precio_comida = $comida->precio;
+            $subtotal = $subtotal + ($precio_comida * $food['cantidad']);        
+        }
+        $request->merge(['subtotal' => $subtotal]);
+
+        $total = $subtotal + ($subtotal * ($ivaCategorizado->iva/100));
+
+        $request->merge(['total' => $total]);
+
+        $datos_venta = $request->only('subtotal', 'total', 'ci_user', 'iva', 
+                                      'id_cliente', 'numero_mesa', 'llevar', 'forma_pago');
+
+        $ventaNueva = Venta::create($datos_venta);      
+        $ventaNueva->save();
+
+        foreach($comidas as $key => $food)
+        {
+          $comida_venta = new Comida_Venta(['id_comida' => $food['id'],
+                                            'id_venta' => $ventaNueva->id, 
+                                            'cantidad'=> $food['cantidad']]);
+          $comida_venta->save();
+       }
+
+
+       return json_encode(['success' => true, 'id_venta' => $ventaNueva->id]);
+  }
+
+  public function destroy($id)
+    {
+      Venta::find($id)->delete();
+
+      return Redirect::back()->with('message','Operation Successful !');
+    }
 }
+

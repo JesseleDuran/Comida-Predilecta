@@ -59,6 +59,11 @@ $(document).ready(function ()
 				
 			});
 		});
+
+	$('.modal').modal();
+    $('#myTable').DataTable();
 </script>
+
+
 
 @endsection

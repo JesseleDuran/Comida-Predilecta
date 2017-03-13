@@ -9,7 +9,7 @@ class Venta extends Model
     protected $table = "venta";
 
     protected $fillable = [
-    	'fecha','subtotal','iva','total','forma_pago','llevar','numero_mesa','ci_cliente','ci_user'			
+    	'fecha','subtotal','iva','total','forma_pago','llevar','numero_mesa','id_cliente','ci_user'			
     ];
 
     //Una venta le pertenece a un usuario

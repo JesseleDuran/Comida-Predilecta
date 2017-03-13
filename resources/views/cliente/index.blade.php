@@ -17,6 +17,7 @@
 
       <table class="highlight" id="myTable">
         <thead>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Cédula</th>
             <th>Acción</th>
@@ -24,6 +25,7 @@
         <tbody>
         @foreach ($clientes as $cliente)
 		    <tr>
+          <td> {{ $cliente->id }}</td>
 		      <td>
             <a href="{{ url('/cliente/'. $cliente->id. '/edit') }}">{{ $cliente->nombre }}</a>
           </td>
@@ -52,7 +54,11 @@
 
   $(document).ready(function(){
     $('.modal').modal();
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }});
   });
 </script>
 

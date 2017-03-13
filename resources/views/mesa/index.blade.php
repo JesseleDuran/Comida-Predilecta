@@ -7,6 +7,12 @@
     <div class="container">
 	  <h2 style="text-align:center"> MESAS DE MI COMIDA PREDILECTA </h2>
 
+    
+
+
+
+      {{Html::ul($errors->all())}}
+
       
       <br>
       <br>
@@ -49,7 +55,11 @@
 
   $(document).ready(function(){
     $('.modal').modal();
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }});
   });
 </script>
 

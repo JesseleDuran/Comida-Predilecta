@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Input\Input;
 use App\Http\Requests\ComidaRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 
 class ComidaController extends Controller
@@ -15,8 +16,15 @@ class ComidaController extends Controller
     public function index()
     {
     	$comidas = Comida::where('tipo', '=', 'comida')->get();
+      $arreglo = array();
 
-    	return view('comida.index', compact('comidas'));
+      for ($i=0; $i < sizeof($comidas) ; $i++) 
+      {
+          $cantPosibleComidas = $this->cantidad_posibleComidas($comidas[$i]->id); 
+          array_push($arreglo, $cantPosibleComidas);    
+      }
+
+    	return view('comida.index', compact('comidas', 'arreglo'));
     }
 
   	public function show($id)
@@ -100,7 +108,27 @@ class ComidaController extends Controller
                                                       'cantidad'=> $cantidad]);
         $ingrediente_comida->save();
         return redirect('comida');
-
     }
+
+    protected function cantidad_posibleComidas($id)
+    {
+      /*SELECT comida.nombre, min((ingrediente.cantidad / comida_ingrediente.cantidad)) as cant_posible
+      FROM comida_ingrediente 
+      INNER JOIN comida
+      ON comida_ingrediente.id_comida = comida.id
+      INNER JOIN ingrediente
+      ON comida_ingrediente.id_ingrediente = ingrediente.id 
+      group by comida.nombre;*/
+      $cantPosibleComidas = DB::table('comida_ingrediente')
+                          ->select(DB::raw('min((ingrediente.cantidad / comida_ingrediente.cantidad)) AS cant_posible, comida.nombre'))
+                          ->join('comida', 'comida_ingrediente.id_comida', '=', 'comida.id')
+                          ->join('ingrediente', 'comida_ingrediente.id_ingrediente', '=', 'ingrediente.id')->where('comida.id', $id)
+                          ->groupBy('comida.nombre')
+                          ->first();
+
+      return $cantPosibleComidas;
+    }
+
+    
 
 }

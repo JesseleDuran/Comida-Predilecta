@@ -17,7 +17,7 @@
           		<div class="left col s12 m3">
                 	<ul id="tabs-swipe-demo" class="tabs tabs-fixed-width grey lighten-3">
                   		<li class="tab left col s8"><a class="active" href="#mesa{{$i+1}}libre" class="black-text">Desocupada</a></li>
-                  		<li class="tab left col s4"><a target="_self" href="{{ url('/empleado/'. $mesas[$i]->id. '/food') }}#mesa{{$i+1}}">M#{{$i+1}}</a></li>
+                  		<li class="tab left col s4"><a target="_self" href="{{ url('/empleado/'. $mesas[$i]->id. '/food') }}#mesa{{$i+1}}" >M#{{$i+1}}</a></li>
                 	</ul>
                 	<div id="mesa{{$i+1}}libre" class="col s12 grey lighten-3"><img src="/images/mesa.png"></div>
                 	<div id="mesa{{$i+1}}" class="col s12 grey lighten-3"><img src="/images/mesaoff.png"></div>
@@ -26,10 +26,10 @@
 
             	<div class="left col s12 m3">
                 	<ul id="tabs-swipe-demo" class="tabs tabs-fixed-width grey lighten-3">
-                  		<li class="tab left col s8"><a href="#mesa{{$i+1}}libre" class="black-text">Desocupada</a></li>
-                  		<li class="tab left col s4"><a class="active" target="_self" href="{{ url('/empleado/'. $mesas[$i]->id. '/food') }}#mesa{{$i+1}}">M#{{$i+1}}</a></li>
+                  		<li class="tab left col s8"><a href="#mesa{{$i+1}}libre" class="black-text" onclick="cambiarEstado({{$mesas[$i]->id}})">Desocupada</a></li>
+                  		<li class="tab left col s4"><a class="active" target="_self" >M#{{$i+1}}</a></li>
                 	</ul>
-                	<div id="mesa{{$i+1}}libre" class="col s12 grey lighten-3"><img src="/images/mesa.png"></div>
+                	
                 	<div id="mesa{{$i+1}}" class="col s12 grey lighten-3"><img src="/images/mesaoff.png"></div>
             	</div>
           @endif	         
@@ -61,6 +61,30 @@
       <!--  Copyright-->
   </footer>
 
-
 @stop
 
+@section('scripts')
+
+
+<script type="text/javascript">
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  function cambiarEstado(id) 
+  {
+      $.ajax({
+      url: '/cambiarEstadoMesa',
+      type: 'POST',
+      data: {_token: CSRF_TOKEN, mesa:id},
+      dataType: 'JSON',
+      success: function (data)
+      {
+        if(data.msg)
+          Materialize.toast(data.msg, 3000, 'red rounded');
+        else
+        {
+          location.reload();
+        }
+      }});
+  }
+</script>
+
+@endsection

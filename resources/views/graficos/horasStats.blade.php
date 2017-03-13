@@ -13,11 +13,19 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>Cantidad de ventas</th>
+						<th>Cantidad de ventas presenciales</th>
+						<th>Cantidad de ventas para llevar</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($horasVentas as $venta)
+					@foreach ($horasVentasPresenciales as $venta)
+					<tr>
+						<th>Hora: {{$venta->hora}}:00 del día</th>
+						<td>{{$venta->suma_cantidad}}</td>
+					</tr>
+					@endforeach
+
+					@foreach ($horasVentasLlevar as $venta)
 					<tr>
 						<th>Hora: {{$venta->hora}}:00 del día</th>
 						<td>{{$venta->suma_cantidad}}</td>
@@ -59,6 +67,10 @@ $(document).ready(function ()
 				
 			});
 		});
+
+
+	$('.modal').modal();
+    $('#myTable').DataTable();
 </script>
 
 @endsection

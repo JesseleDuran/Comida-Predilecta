@@ -47,13 +47,21 @@ class EstadisticasController extends Controller
     public function horasVentas()
     {
 
-       $horasVentas = DB::table('venta')
+       $horasVentasPresenciales = DB::table('venta')
                           ->select(DB::raw('EXTRACT(hour from venta.created_at) as hora'), DB::raw('count(*) as suma_cantidad'))
+                          ->where('llevar', 'false')
                           ->orderBy('suma_cantidad', 'desc')
                           ->groupBy('hora')
                           ->get();
 
-       return view('graficos.horasStats', compact('horasVentas'));
+        $horasVentasLlevar = DB::table('venta')
+                          ->select(DB::raw('EXTRACT(hour from venta.created_at) as hora'), DB::raw('count(*) as suma_cantidad'))
+                          ->where('llevar', 'true')
+                          ->orderBy('suma_cantidad', 'desc')
+                          ->groupBy('hora')
+                          ->get();                  
+
+       return view('graficos.horasStats', compact('horasVentasPresenciales', 'horasVentasLlevar'));
     }
 
     public function diasVentas()

@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('misVentas', 'EmpleadoController@misVentas');
     Route::get('empleado/mesas', 'EmpleadoController@mesas');
     Route::get('/empleado/{mesa}/food', 'EmpleadoController@showFood');
+    Route::post('/guardarVenta', 'VentaController@guardarVenta');
+    Route::post('/cambiarEstadoMesa', 'MesaController@cambiarEstado');
 
 });
 

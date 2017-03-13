@@ -42,7 +42,7 @@ class IngredienteController extends Controller
 
       $ingrediente = new Ingrediente();
       $ingrediente->nombre = $input['nombre'];*/
-
+      
       Ingrediente::create($request->all());
 
       flash()->success('El ingrediente ha sido creado');

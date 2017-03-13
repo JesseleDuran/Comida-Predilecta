@@ -24,11 +24,11 @@
               <th  data-field="price">Descripcion</th>
               <th  data-field="price">Ingredientes</th>
       </tr>
-      @foreach ($comidas as $comida)
+      @foreach($comidas as $key => $comida)  
       <tr color="#fff" >
             
             <td>{{ $comida->nombre }}</td>
-            <td> query</td>
+            <td> {{ $arreglo[$key]->cant_posible }}</td>
             <td>{{ $comida->precio }}</td>
             <td>{{ $comida->descripcion }}  </td> 
             <td>
@@ -45,3 +45,4 @@
 </div>
 </body>
 </html>
+
