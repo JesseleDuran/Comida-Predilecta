@@ -66,6 +66,8 @@ Route::group(['middleware' => 'admin'], function()
     Route::get('/DiasVentas', 'EstadisticasController@diasVentas');
     Route::get('/CrearEmpleado', 'EmpleadoController@create');
 
+    
+
 
     Route::get('comida/{id_comida}/deleteComidaIngrediente/{id_ingrediente}', 'ComidaController@deleteComidaIngrediente');
 

@@ -10,15 +10,14 @@ use App\Cliente;
 use App\User;
 use App\Comida_Venta;
 use App\Mesa;
+use App\Ingrediente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\VentaRequest;
-
+use Illuminate\Support\Facades\DB;
 
 class VentaController extends Controller
 {
-
-
     public function index()
     {
       $ventas = Venta::latest('created_at')->get();
@@ -31,6 +30,25 @@ class VentaController extends Controller
 
       $venta = Venta::findOrFail($id);
       $empleado = User::where('cedula' ,Auth::id())->first();
+
+      $ingredientes = Ingrediente::all();
+
+       $valor_ingredienteNuevo = $this->set_ingredientes($id);//array con valores nuevos y nombre
+
+        
+        for ($i=0; $i < sizeof($ingredientes) ; $i++) 
+        { 
+          for ($j=0; $j < sizeof($valor_ingredienteNuevo) ; $j++) 
+          { 
+              if ($valor_ingredienteNuevo[$j]->nombre == $ingredientes[$i]->nombre ) 
+              {
+                $ingre = Ingrediente::findOrFail($ingredientes[$i]->id);
+                Ingrediente::where('id', $ingredientes[$i]->id)->update(array('cantidad' => $valor_ingredienteNuevo[$j]->resultado));
+              }  
+          }
+        }
+
+
 
       return view('venta.show', compact('venta', 'empleado'));
     }
@@ -127,6 +145,8 @@ class VentaController extends Controller
         $ventaNueva = Venta::create($datos_venta);      
         $ventaNueva->save();
 
+      
+
         foreach($comidas as $key => $food)
         {
           $comida_venta = new Comida_Venta(['id_comida' => $food['id'],
@@ -134,6 +154,9 @@ class VentaController extends Controller
                                             'cantidad'=> $food['cantidad']]);
           $comida_venta->save();
        }
+
+        /*$valor_ingredienteNuevo = $this->set_ingredientes($ventaNueva->id);
+        dd($valor_ingredienteNuevo);*/
 
 
        return json_encode(['success' => true, 'id_venta' => $ventaNueva->id]);
@@ -175,6 +198,18 @@ class VentaController extends Controller
       }
 
       return redirect('venta');
+    }
+
+    protected function set_ingredientes($venta_id)
+    {
+      $result = DB::table('comida_venta')
+                          ->select(DB::raw('(ingrediente.cantidad - (comida_ingrediente.cantidad*comida_venta.cantidad)) as resultado, ingrediente.nombre'))
+                          ->join('comida', 'comida_venta.id_comida', '=', 'comida.id')
+                          ->join('comida_ingrediente', 'comida_ingrediente.id_comida', '=', 'comida.id')
+                          ->join('ingrediente', 'comida_ingrediente.id_ingrediente', '=', 'ingrediente.id')->where('comida_venta.id_venta', $venta_id)
+                          ->get();
+
+      return $result;
     }
 }
 

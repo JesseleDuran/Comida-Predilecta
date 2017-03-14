@@ -64,12 +64,14 @@
                   <li><a href="{{ url('/MesasVentas') }}">Mesas con más ventas</a></li>
                   <li><a href="{{ url('/HorasVentas') }}">Horas con más ventas</a></li>
                   <li><a href="{{ url('/DiasVentas') }}">Dia con más ventas</a></li>
+
                 </ul>
               </div>
             </li>
           </ul>
         </li>
         <li class="bold"><a href="{{ url('/empleado/mesas') }}" class="waves-effect waves-white">Trabajar como vendedor</a></li>
+        <li class="bold"><a href="/backup/comidapredilectadb.backup" class="waves-effect waves-white">Descargar Backup</a></li>
 
         
         </ul>
@@ -88,7 +90,7 @@
 		<li><a href="{{ url('/comida/create') }}" class="orange-text">Comida, Bebida</a></li>
 		<li><a href="{{ url('/combo/create') }}" class="orange-text">Combo</a></li>		
 		<li class="divider"></li>
-		<li><a href="{{ url('/register') }}" class="orange-text">Empleado</a></li>
+		<li><a href="{{ url('/user/create') }}" class="orange-text">Empleado</a></li>
 		<li><a href="#modal5" class="orange-text">Mesa</a></li>
 	  </ul>
   </nav>

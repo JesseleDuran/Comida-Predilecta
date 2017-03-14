@@ -435,3 +435,48 @@
 
 
 
+@if ($submitButtonText == 'Añadir Empleado')
+<div class="form-group">
+  {!! Form::label('nombre', 'Nombre:') !!}
+  <!-- atributo, default, otro aributo -->
+  {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('cedula', 'cedula:') !!}
+  {!! Form::text('cedula', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('telefono', 'telefono:') !!}
+  {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('direccion', 'direccion:') !!}
+  {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('password', 'password:') !!}
+  {!! Form::text('password', null, ['class' => 'form-control']) !!}
+</div>
+
+
+
+  <!-- Añade ingrediente -->
+@if ($errors->any())  
+<div class="form-group" >
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+@else
+<div class="form-group" >
+  {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
+</div>
+@endif
+
+
+@endif
+
+
+

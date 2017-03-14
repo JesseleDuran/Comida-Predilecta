@@ -46,8 +46,7 @@
                     <label class="active" for="first_name2">Dirección</label>
         </div>
   </div>
-        </form>
-      <a class="waves-effect waves-light btn teal" href="#modalclave"><i class="material-icons left">vpn_key</i>¿Desea cambiar su contraseña?</a>
+        
 
   
   <div id="modalclave" class="modal">

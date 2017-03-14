@@ -17,6 +17,7 @@ class UserController extends Controller
   	public function show($id)
   	{
 
+
   		$user = User::findOrFail($id);
 
   		return view('user.show', compact('user'));
@@ -30,14 +31,16 @@ class UserController extends Controller
     }
 
     /*la validación es disparada antes de que se cree el user*/
-    public function store(userRequest $request)
+    public function store(Request $request)
     {
+      $encriptada = bcrypt($request->input('password'));
+      $request->merge(['password' =>  $encriptada]);
 
       User::create($request->all());
 
       flash()->success('El user ha sido creado');
 
-      return Redirect::back()->with('message','Operation Successful !');
+      return view('index');
     }
 
     public function edit($id)

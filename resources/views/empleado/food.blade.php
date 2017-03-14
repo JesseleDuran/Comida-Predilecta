@@ -13,7 +13,7 @@
 
                     </form>
                         <section id="cajadatos">
-                            Factura #456709
+                            Factura 
                       
                         </section>
                     
